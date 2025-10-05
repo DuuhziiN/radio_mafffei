@@ -28,12 +28,18 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 # Arquivo: meu_projeto/settings.py (NOVO BLOCO DE ALLOWED_HOSTS)
 
 # Lista de hosts permitidos para o Render e teste local
-ALLOWED_HOSTS = [
-    '127.0.0.1', 
-    'localhost', 
-    # Adiciona a URL pública FIXA (O Render está nos dizendo o que aceitar)
-    'radio-mafffei.onrender.com' 
-]
+# Arquivo: meu_projeto/settings.py
+
+# ... (após os imports iniciais) ...
+
+# LÓGICA FINAL SIMPLES:
+if DEBUG:
+    # Em desenvolvimento local, aceita hosts locais
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+else:
+    # Em produção (Render), aceita a URL pública e qualquer outra que possa surgir
+    ALLOWED_HOSTS = ['radio-mafffei.onrender.com', '*'] 
+    # Adicionamos '*' para cobrir qualquer variação de host que o Render possa usar
 
 INSTALLED_APPS = [
     'django.contrib.admin',
