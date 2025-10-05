@@ -14,21 +14,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
 
+# LÓGICA DE DEBUG: Desliga o debug automaticamente em produção
 DEBUG = os.environ.get('DEBUG', 'False') == 'True' 
-# Isso define DEBUG=False em produção e True localmente.
 
-# ...
-# SUBSTITUA O BLOCO ALLOWED_HOSTS por uma versão mais simples:
+# =================================================================
+# ALLOWED_HOSTS (CORREÇÃO DE LÓGICA)
+# =================================================================
 if DEBUG:
-    # Em desenvolvimento local, usa hosts locais
+    # Em desenvolvimento local, aceita hosts locais
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 else:
     # Em produção (Render), aceita a URL pública e qualquer outra que possa surgir
-    # Este é o último recurso para o erro DisallowedHost
     ALLOWED_HOSTS = ['*'] 
-    
-    
-    INSTALLED_APPS = [
+
+# =================================================================
+# CONFIGURAÇÕES PRINCIPAIS (AGORA FORA DO IF/ELSE)
+# =================================================================
+
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,7 +40,6 @@ else:
     'django.contrib.staticfiles',
     'radiomaffei',
     'channels',
-    # REMOVIDO: 'cloudinary_storage' e 'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -48,7 +50,6 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -107,12 +108,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
-# REMOVIDO: Credenciais Cloudinary
-
-# CONFIGURAÇÃO CRÍTICA: REVERTE PARA ARMAZENAMENTO LOCAL (FILE SYSTEM)
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -131,5 +128,4 @@ CHANNEL_LAYERS = {
 # Configuração de Login e Logout
 LOGIN_REDIRECT_URL = reverse_lazy('radiomaffei:radialista') 
 LOGOUT_REDIRECT_URL = reverse_lazy('radiomaffei:home')
-
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
