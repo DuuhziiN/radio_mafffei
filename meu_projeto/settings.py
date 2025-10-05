@@ -138,3 +138,8 @@ CHANNEL_LAYERS = {
 # Configuração de Login e Logout
 LOGIN_REDIRECT_URL = reverse_lazy('radiomaffei:radialista') 
 LOGOUT_REDIRECT_URL = reverse_lazy('radiomaffei:home')
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://radio-mafffei.onrender.com',
+    # Adicione a URL do Render aqui, usando HTTPS.
+]
