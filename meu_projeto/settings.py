@@ -19,8 +19,16 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # ...
 # SUBSTITUA O BLOCO ALLOWED_HOSTS por uma versão mais simples:
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-INSTALLED_APPS = [
+if DEBUG:
+    # Em desenvolvimento local, usa hosts locais
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+else:
+    # Em produção (Render), aceita a URL pública e qualquer outra que possa surgir
+    # Este é o último recurso para o erro DisallowedHost
+    ALLOWED_HOSTS = ['*'] 
+    
+    
+    INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
