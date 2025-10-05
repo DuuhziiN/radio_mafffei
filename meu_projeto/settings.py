@@ -33,14 +33,14 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 # ... (após os imports iniciais) ...
 
 # LÓGICA FINAL SIMPLES:
-if DEBUG:
-    # Em desenvolvimento local, aceita hosts locais
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-else:
-    # Em produção (Render), aceita a URL pública e qualquer outra que possa surgir
-    ALLOWED_HOSTS = ['radio-mafffei.onrender.com', '*'] 
-    # Adicionamos '*' para cobrir qualquer variação de host que o Render possa usar
-
+ALLOWED_HOSTS = [
+    '127.0.0.1', 
+    'localhost', 
+    # Adiciona o domínio Render
+    'radio-mafffei.onrender.com',
+    # Adicionamos o subdomínio HTTPS, por segurança:
+    'https://radio-mafffei.onrender.com' 
+]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -144,3 +144,5 @@ CHANNEL_LAYERS = {
 # Configuração de Login e Logout
 LOGIN_REDIRECT_URL = reverse_lazy('radiomaffei:radialista') 
 LOGOUT_REDIRECT_URL = reverse_lazy('radiomaffei:home')
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
