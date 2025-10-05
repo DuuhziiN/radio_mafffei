@@ -2,30 +2,34 @@
 Django settings for meu_projeto project.
 """
 
-# =================================================================
-# CORREÇÃO CRÍTICA: CARREGAMENTO DE VARIÁVEIS DE AMBIENTE (.env)
-# MOVEMOS PARA O TOPO para garantir que as chaves existam antes da configuração do Django.
-# =================================================================
 import os 
 from pathlib import Path
 from dotenv import load_dotenv 
 from django.urls import reverse_lazy 
 
-load_dotenv() # <--- CARREGA O ARQUIVO .env AQUI
+# =================================================================
+# CORREÇÃO CRÍTICA DO AMBIENTE: Carrega variáveis de segurança primeiro
+# =================================================================
+load_dotenv() 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# A SECRET_KEY agora puxa do ambiente
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
 
-DEBUG = True 
+# LÓGICA DE DEBUG: Desliga o debug automaticamente em produção
+DEBUG = os.environ.get('DEBUG', 'False') == 'True' 
+
+
+# =================================================================
+# CORREÇÃO CRÍTICA DO ALLOWED_HOSTS PARA RENDER
+# =================================================================
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
-# LÓGICA DE PRODUÇÃO: O Render envia a URL do host. O Django deve lê-la.
+# Lógica para aceitar a URL pública do Render
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
-    # Esta linha garante que o Django aceite a URL oficial do Render
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME) 
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -57,7 +61,6 @@ ROOT_URLCONF = 'meu_projeto.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # DIRS CORRIGIDO: Usa o método os.path.join para compatibilidade universal
         'DIRS': [os.path.join(BASE_DIR, 'templates')], 
         'APP_DIRS': True,
         'OPTIONS': {
@@ -108,15 +111,12 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
-# CONFIGURAÇÃO DE CREDENCIAIS (Puxa do .env)
+# Configuração de Credenciais Cloudinary (Puxa do .env ou do Render)
 CLOUDINARY_CLOUD_NAME = os.environ.get('CLOUDINARY_CLOUD_NAME')
 CLOUDINARY_API_KEY = os.environ.get('CLOUDINARY_API_KEY')
 CLOUDINARY_API_SECRET = os.environ.get('CLOUDINARY_API_SECRET')
-
-# Configura o Django para usar o Cloudinary para a MÍDIA
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
