@@ -19,7 +19,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
 
 DEBUG = True 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'radio-mafffei.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+# LÓGICA DE PRODUÇÃO: O Render envia a URL do host. O Django deve lê-la.
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    # Esta linha garante que o Django aceite a URL oficial do Render
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME) 
 
 INSTALLED_APPS = [
     'django.contrib.admin',
