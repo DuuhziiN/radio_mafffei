@@ -25,12 +25,16 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 # ... (após os imports iniciais) ...
 
 # LÓGICA FINAL: Força a aceitação do domínio público do Render.
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# Arquivo: meu_projeto/settings.py (NOVO BLOCO DE ALLOWED_HOSTS)
 
-# Aceitamos a URL real do Render e qualquer subdomínio que possa existir.
-ALLOWED_HOSTS.append('radio-mafffei.onrender.com') 
-ALLOWED_HOSTS.append('*.onrender.com') # Aceita subdomínios que o Render pode usar
-ALLOWED_HOSTS.append('*') # Última e definitiva tentativa de aceitar o host
+# Lista de hosts permitidos para o Render e teste local
+ALLOWED_HOSTS = [
+    '127.0.0.1', 
+    'localhost', 
+    # Adiciona a URL pública FIXA (O Render está nos dizendo o que aceitar)
+    'radio-mafffei.onrender.com' 
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
