@@ -5,7 +5,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
-
+from django.urls import path, include, re_path # NOVO IMPORT: re_path
+from django.conf.urls import url # NOVO IMPORT: url
+from django.views.static import serve # NOVO IMPORT: serve
 urlpatterns = [
     path('admin/', admin.site.urls),
     # URLs principais do aplicativo
@@ -21,5 +23,11 @@ urlpatterns = [
 
 # 1. Mapeamento para MÍDIA (uploads de música) - CRÍTICO
 # Isso resolve o erro Not Found, permitindo que o WhiteNoise sirva a pasta MEDIA.
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
+]
+    
+# Mapeamento para ESTÁTICOS (CSS/JS)
 urlpatterns += staticfiles_urlpatterns()
