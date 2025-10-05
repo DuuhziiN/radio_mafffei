@@ -14,22 +14,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
 
-# LÓGICA DE DEBUG: Desliga o debug automaticamente em produção
+# Lógica final para DEBUG e ALLOWED_HOSTS (resolve o DisallowedHost)
 DEBUG = os.environ.get('DEBUG', 'False') == 'True' 
-
-# =================================================================
-# ALLOWED_HOSTS (CORREÇÃO DE LÓGICA)
-# =================================================================
 if DEBUG:
-    # Em desenvolvimento local, aceita hosts locais
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 else:
     # Em produção (Render), aceita a URL pública e qualquer outra que possa surgir
-    ALLOWED_HOSTS = ['*'] 
-
-# =================================================================
-# CONFIGURAÇÕES PRINCIPAIS (AGORA FORA DO IF/ELSE)
-# =================================================================
+    ALLOWED_HOSTS = ['radio-mafffei.onrender.com', '*'] 
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,6 +41,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -71,7 +63,6 @@ TEMPLATES = [
 ]
 
 ASGI_APPLICATION = 'meu_projeto.asgi.application' 
-
 
 DATABASES = {
     'default': {
@@ -107,9 +98,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Render irá salvar aqui (temporariamente)
 
 
+# CONFIGURAÇÃO CRÍTICA: REVERTE PARA ARMAZENAMENTO LOCAL E FINALIZA CONFLITOS
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -128,6 +120,3 @@ CHANNEL_LAYERS = {
 # Configuração de Login e Logout
 LOGIN_REDIRECT_URL = reverse_lazy('radiomaffei:radialista') 
 LOGOUT_REDIRECT_URL = reverse_lazy('radiomaffei:home')
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-WHITENOISE_FORCING_MEDIA_FILES = True
