@@ -129,3 +129,5 @@ CHANNEL_LAYERS = {
 LOGIN_REDIRECT_URL = reverse_lazy('radiomaffei:radialista') 
 LOGOUT_REDIRECT_URL = reverse_lazy('radiomaffei:home')
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+WHITENOISE_FORCING_MEDIA_FILES = True
