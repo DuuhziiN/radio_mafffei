@@ -15,32 +15,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True' 
-# Arquivo: meu_projeto/settings.py (NA SEÇÃO DE CONFIGURAÇÕES INICIAIS)
+# Isso define DEBUG=False em produção e True localmente.
 
-# ... (após os imports iniciais) ...
-
-# Lista de hosts permitidos (local e URL pública)
-# Arquivo: meu_projeto/settings.py
-
-# ... (após os imports iniciais) ...
-
-# LÓGICA FINAL: Força a aceitação do domínio público do Render.
-# Arquivo: meu_projeto/settings.py (NOVO BLOCO DE ALLOWED_HOSTS)
-
-# Lista de hosts permitidos para o Render e teste local
-# Arquivo: meu_projeto/settings.py
-
-# ... (após os imports iniciais) ...
-
-# LÓGICA FINAL SIMPLES:
-ALLOWED_HOSTS = [
-    '127.0.0.1', 
-    'localhost', 
-    # Adiciona o domínio Render
-    'radio-mafffei.onrender.com',
-    # Adicionamos o subdomínio HTTPS, por segurança:
-    'https://radio-mafffei.onrender.com' 
-]
+# ...
+# SUBSTITUA O BLOCO ALLOWED_HOSTS por uma versão mais simples:
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
