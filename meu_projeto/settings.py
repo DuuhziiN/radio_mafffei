@@ -7,29 +7,15 @@ from pathlib import Path
 from dotenv import load_dotenv 
 from django.urls import reverse_lazy 
 
-# =================================================================
-# CORREÇÃO CRÍTICA DO AMBIENTE: Carrega variáveis de segurança primeiro
-# =================================================================
+# Carrega variáveis de ambiente
 load_dotenv() 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
 
-# LÓGICA DE DEBUG: Desliga o debug automaticamente em produção
 DEBUG = os.environ.get('DEBUG', 'False') == 'True' 
-
-
-# =================================================================
-# CORREÇÃO CRÍTICA DO ALLOWED_HOSTS PARA RENDER
-# =================================================================
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
-# Lógica para aceitar a URL pública do Render
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME) 
-
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,8 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'radiomaffei',
     'channels',
-    'cloudinary_storage', 
-    'cloudinary', 
+    # REMOVIDO: 'cloudinary_storage' e 'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -52,12 +37,12 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'meu_projeto.urls'
 
-# Configuração para encontrar a pasta templates/registration/ na raiz
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -111,15 +96,12 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
-# Configuração de Credenciais Cloudinary (Puxa do .env ou do Render)
-CLOUDINARY_CLOUD_NAME = os.environ.get('CLOUDINARY_CLOUD_NAME')
-CLOUDINARY_API_KEY = os.environ.get('CLOUDINARY_API_KEY')
-CLOUDINARY_API_SECRET = os.environ.get('CLOUDINARY_API_SECRET')
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# REMOVIDO: Credenciais Cloudinary
 
-
+# CONFIGURAÇÃO CRÍTICA: REVERTE PARA ARMAZENAMENTO LOCAL (FILE SYSTEM)
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -138,8 +120,3 @@ CHANNEL_LAYERS = {
 # Configuração de Login e Logout
 LOGIN_REDIRECT_URL = reverse_lazy('radiomaffei:radialista') 
 LOGOUT_REDIRECT_URL = reverse_lazy('radiomaffei:home')
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://radio-mafffei.onrender.com',
-    # Adicione a URL do Render aqui, usando HTTPS.
-]

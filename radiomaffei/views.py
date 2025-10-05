@@ -16,7 +16,6 @@ def pagina_ouvinte(request):
 # =========================================================
 # 2. VIEW DO PAINEL DO RADIALISTA (RESTRITA)
 # =========================================================
-# Restringe o acesso apenas a quem tem a permissão 'can_access_radialista'
 @permission_required('radiomaffei.can_access_radialista', login_url='/contas/login/')
 def pagina_radialista(request):
     
@@ -42,6 +41,7 @@ def deletar_musica(request, musica_id):
     musica = get_object_or_404(Musica, pk=musica_id)
     
     if request.method == 'POST':
+        # Remove o arquivo físico (no Render, ele é temporário)
         musica.arquivo.delete() 
         musica.delete() 
         
