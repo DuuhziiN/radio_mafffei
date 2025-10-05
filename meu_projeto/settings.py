@@ -15,7 +15,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True' 
-ALLOWED_HOSTS = ['*']
+# Arquivo: meu_projeto/settings.py (NA SEÇÃO DE CONFIGURAÇÕES INICIAIS)
+
+# ... (após os imports iniciais) ...
+
+# Lista de hosts permitidos (local e URL pública)
+ALLOWED_HOSTS = [
+    '127.0.0.1', 
+    'localhost', 
+    'radio-mafffei.onrender.com' # <--- A URL FIXA PARA O DEPLOY
+]
+
+# ...
 
 INSTALLED_APPS = [
     'django.contrib.admin',
