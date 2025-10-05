@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Painel do Radialista - Rádio Maffei</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <h1>🔒 Painel de Controle ({{ user.username }})</h1>
+    <a href="{% url 'radiomaffei:home' %}">Ver Página do Ouvinte</a> |
+    <form style="display: inline;" method="POST" action="{% url 'admin:logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="logout-button">Sair (Logout)</button>
+    </form>
+
+    <hr>
+
+    <div class="dashboard-container">
+
+        <div class="dashboard-col">
+
+            <h2>🎙️ Controles Ao Vivo</h2>
+            <div id="live-controls">
+                <button id="start-stream-button">Iniciar Fala ao Vivo</button>
+                <button id="stop-stream-button" disabled>Parar Transmissão</button>
+                <p id="status-message">Aguardando conexão...</p>
+            </div>
+
+            <hr>
+
+            <h2>Enviar Música</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Adicionar à Playlist</button>
+            </form>
+
+        </div>
+
+        <div class="dashboard-col">
+
+            <h3>Playlist Atual (Para Referência)</h3>
+            <ul>
+                {% for musica in musicas %}
+                <li>
+                    <span style="font-weight: bold;">{{ musica.titulo }}</span>
+
+                    <form method="POST" action="{% url 'radiomaffei:deletar_musica' musica_id=musica.id %}"
+                        style="display: inline; margin-left: 15px;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-button">Deletar</button>
+                    </form>
+                </li>
+                {% empty %}
+                <li>Nenhuma música.</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+    </div>
+    {% include "audio_script.html" %}
+
+</body>
+
+</html>

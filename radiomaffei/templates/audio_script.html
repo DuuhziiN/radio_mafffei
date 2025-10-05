@@ -1,0 +1,156 @@
+<script>
+    // ===============================================
+    // FUNÇÃO DE DETECÇÃO DE CODEC (RESTAURADA)
+    // ===============================================
+    const findSupportedMimeType = () => {
+        // Tenta formatos na ordem de compatibilidade
+        const possibleTypes = [
+            'audio/ogg; codecs=opus',
+            'audio/webm; codecs=opus',
+            'audio/webm',
+            'audio/ogg'
+        ];
+
+        for (const mime of possibleTypes) {
+            // Verifica se o navegador suporta para CAPTURA (MediaRecorder) e REPRODUÇÃO (MediaSource)
+            if (MediaRecorder.isTypeSupported(mime) && MediaSource.isTypeSupported(mime)) {
+                return mime;
+            }
+        }
+        // Se nada funcionar, força o mais comum para tentar
+        return 'audio/webm';
+    };
+
+    // ===============================================
+    // DECLARAÇÕES GLOBAIS
+    // ===============================================
+    const audioQueue = [];
+
+    // O codec é detectado no início (será 'audio/webm' ou 'audio/ogg; codecs=opus')
+    const supportedMimeType = findSupportedMimeType();
+
+    // Elementos DOM
+    const startButton = document.getElementById('start-stream-button');
+    const stopButton = document.getElementById('stop-stream-button');
+    const statusMessage = document.getElementById('status-message');
+    const audioPlayer = document.getElementById('audio-player');
+
+    // Configuração do WebSocket (AGORA SEMPRE INICIALIZA)
+    const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const wsPath = wsProtocol + '//' + window.location.host + '/ws/live_audio/';
+    const socket = new WebSocket(wsPath);
+
+    let mediaRecorder;
+    let mediaSource = new MediaSource();
+
+    // Inicialização do player
+    if (audioPlayer) {
+        audioPlayer.src = URL.createObjectURL(mediaSource);
+    }
+
+    // Se a detecção falhou, desabilita a interface, mas a conexão WS já foi feita.
+    if (!MediaRecorder.isTypeSupported(supportedMimeType)) {
+        if (startButton) {
+            statusMessage.textContent = 'ERRO: Codec não suportado. Tente o Firefox.';
+            startButton.disabled = true;
+        }
+    }
+
+
+    // ===============================================
+    // LÓGICA DO RADIALISTA (CONTROLES DE TRANSMISSÃO)
+    // ===============================================
+
+    if (startButton && stopButton) {
+
+        // 1. Lógica do Botão INICIAR
+        startButton.onclick = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+                startButton.disabled = true;
+                stopButton.disabled = false;
+                statusMessage.textContent = '🎤 Transmitindo ao vivo...';
+
+                mediaRecorder = new MediaRecorder(stream, { mimeType: supportedMimeType });
+
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        if (socket.readyState === WebSocket.OPEN) {
+                            socket.send(event.data);
+                        }
+                    }
+                };
+
+                mediaRecorder.start(100);
+
+            } catch (err) {
+                if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
+                    statusMessage.textContent = "ERRO: Acesso ao microfone negado! Permita e tente novamente.";
+                } else {
+                    statusMessage.textContent = `ERRO CRÍTICO: ${err.name}`;
+                }
+                console.error('ERRO DE FLUXO DE ÁUDIO:', err);
+            }
+        };
+
+        // 2. Lógica do Botão PARAR
+        stopButton.onclick = () => {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                statusMessage.textContent = 'Transmissão parada. Aguardando...';
+            }
+        };
+    }
+
+
+    // ===============================================
+    // LÓGICA DO OUVINTE (RECEPÇÃO E REPRODUÇÃO)
+    // ===============================================
+
+    mediaSource.addEventListener('sourceopen', () => {
+        if (!audioPlayer) return;
+
+        // CRÍTICO: USA O MESMO CODEC DETECTADO PELO ORADOR
+        const mimeType = supportedMimeType;
+
+        if (!MediaSource.isTypeSupported(mimeType)) {
+            // Este erro é o que você está vendo agora!
+            console.error('O Ouvinte não suporta o formato: ' + mimeType + '. Tente outro navegador.');
+            if (statusMessage) statusMessage.textContent = 'ERRO CRÍTICO: Formato de áudio não suportado.';
+            return;
+        }
+
+        const sourceBuffer = mediaSource.addSourceBuffer(mimeType);
+
+        // ... (Resto da lógica de fila) ...
+        const processQueue = () => {
+            if (!sourceBuffer.updating && audioQueue.length > 0) {
+                const chunk = audioQueue.shift();
+                try {
+                    sourceBuffer.appendBuffer(chunk);
+                } catch (e) {
+                    console.error("Erro de sincronização na fila:", e);
+                    setTimeout(processQueue, 50);
+                }
+            }
+            if (audioPlayer.paused) {
+                audioPlayer.play().catch(e => { });
+            }
+        };
+
+        sourceBuffer.addEventListener('updateend', processQueue);
+
+        socket.onmessage = async (event) => {
+            const audioData = event.data;
+            const arrayBuffer = await audioData.arrayBuffer();
+            audioQueue.push(arrayBuffer);
+            processQueue();
+        };
+
+    }, false);
+</script>

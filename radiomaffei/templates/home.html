@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rádio Maffei - Ao Vivo</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <h1>🎵 Rádio Maffei</h1>
+    <a href="{% url 'radiomaffei:radialista' %}">Acesso Radialista</a>
+
+    <hr>
+
+    <div class="player-section">
+        <h2>AO VIVO Agora!</h2>
+        <div id="live-controls">
+            <p id="status-message">Conectando ao stream...</p>
+            <audio id="audio-player" controls autoplay></audio>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="playlist-section">
+        <h2>Playlist</h2>
+        <ul>
+            {% for musica in musicas %}
+            <li>
+                {{ musica.titulo }} <br>
+                <audio controls>
+                    <source src="{{ musica.arquivo.url }}" type="audio/mpeg">
+                    Seu navegador não suporta áudio.
+                </audio>
+            </li>
+            {% empty %}
+            <li>Nenhuma música enviada ainda.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% include "audio_script.html" %}
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+# Arquivo: .gitignore
+
+# Ambientes e Logs
+*.pyc
+__pycache__/
+venv/
+*.log
+
+# Dados de Usuário e Segurança
+db.sqlite3
+.env # CRÍTICO: Não suba suas chaves!
+/media/
+/staticfiles/
