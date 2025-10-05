@@ -122,3 +122,4 @@ CSRF_TRUSTED_ORIGINS = [
 # Configuração de Login e Logout
 LOGIN_REDIRECT_URL = reverse_lazy('radiomaffei:radialista') 
 LOGOUT_REDIRECT_URL = reverse_lazy('radiomaffei:home')
+WHITENOISE_FORCING_MEDIA_FILES = True

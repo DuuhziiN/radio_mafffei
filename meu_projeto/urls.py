@@ -22,6 +22,4 @@ urlpatterns = [
 # 1. Mapeamento para MÍDIA (uploads de música) - CRÍTICO
 # Isso resolve o erro Not Found, permitindo que o WhiteNoise sirva a pasta MEDIA.
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    
-# 2. Mapeamento para ESTÁTICOS (CSS/JS)
 urlpatterns += staticfiles_urlpatterns()
