@@ -7,8 +7,10 @@ from pathlib import Path
 from dotenv import load_dotenv 
 from django.urls import reverse_lazy 
 
+# Carrega variáveis de ambiente
 load_dotenv() 
 
+# BASE_DIR aponta para o diretório de configurações (meu_projeto/meu_projeto/)
 BASE_DIR = Path(__file__).resolve().parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
@@ -32,7 +34,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # COMENTADO: 'whitenoise.middleware.WhiteNoiseMiddleware', 
+    # WhiteNoise COMENTADO para o teste local
+    # 'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -44,6 +47,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'meu_projeto.urls'
 
+# DIRS aponta para a pasta templates/ ao lado de settings.py
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -65,6 +69,7 @@ ASGI_APPLICATION = 'meu_projeto.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
+        # Banco de dados na raiz do projeto (um nível acima)
         'NAME': Path(__file__).resolve().parent.parent / 'db.sqlite3',
     }
 }
@@ -94,9 +99,13 @@ USE_TZ = True
 
 # Configurações de Arquivos Estáticos e Mídia
 STATIC_URL = '/static/'
+# STATIC_ROOT aponta para a pasta de coleta na raiz do projeto (um nível acima)
 STATIC_ROOT = Path(__file__).resolve().parent.parent / 'staticfiles'
 
-# A busca de estáticos agora é feita por APP_DIRS = True (default)
+# CORREÇÃO CRÍTICA: Ativa a busca na pasta 'static' na raiz do projeto
+STATICFILES_DIRS = [
+    Path(__file__).resolve().parent.parent / 'static', 
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(Path(__file__).resolve().parent.parent, 'media')
