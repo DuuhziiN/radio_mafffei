@@ -6,17 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de Controle da Rádio</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
+    <link rel="stylesheet" href="{% static 'css/radialista.css' %}">
 </head>
 
 <body>
-
     <div class="header-painel">
         <div class="logo-painel">
             <img src="{% static 'img/logoo.png' %}" alt="Logo Rádio">
         </div>
-        <h1>Painel de Controle da Rádio</h1>
+        <h1>🔒 Painel de Controle ({{ user.username }})</h1>
 
         <div class="painel-nav">
             <a href="{% url 'radiomaffei:home' %}">Ver Site</a>
@@ -61,7 +59,8 @@
                     <li>
                         <span style="font-weight: bold;">{{ musica.titulo }}</span>
 
-                        <form method="POST" action="{% url 'radiomaffei:deletar_musica' musica_id=musica.id %}">
+                        <form method="POST" action="{% url 'radiomaffei:deletar_musica' musica_id=musica.id %}"
+                            style="display: inline;">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-deletar">Deletar</button>
                         </form>

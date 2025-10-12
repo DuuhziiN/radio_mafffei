@@ -1,38 +1,45 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const audio = document.getElementById('radio-stream');
-    const playPauseBtn = document.getElementById('play-pause-btn');
-    const icon = playPauseBtn.querySelector('i');
-    let isPlaying = false;
+// ARQUIVO: radiomaffei/static/js/radio.js
 
-    function playRadio() {
-        audio.play().then(() => {
-            isPlaying = true;
+document.addEventListener('DOMContentLoaded', () => {
+    // === LÓGICA DE CONEXÃO DO PLAYER (HOME PAGE) ===
+
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const audioPlayer = document.getElementById('audio-player');
+
+    // Este código só deve rodar se o botão estilizado e o player de streaming existirem
+    if (playPauseBtn && audioPlayer) {
+        playPauseBtn.addEventListener('click', (event) => {
+            event.preventDefault(); // Impede o link de navegar (para o 'a href="#"')
+
+            const icon = playPauseBtn.querySelector('i');
+
+            if (audioPlayer.paused) {
+                // Tenta dar Play no player do Channels
+                audioPlayer.play().catch(error => {
+                    console.error("Erro ao tentar dar Play:", error);
+                    alert("A reprodução foi bloqueada pelo navegador. Tente novamente clicando no botão.");
+                });
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+            } else {
+                // Dá Pause
+                audioPlayer.pause();
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+            }
+        });
+
+        // Mantém o ícone sincronizado com o estado do áudio
+        audioPlayer.addEventListener('play', () => {
+            const icon = playPauseBtn.querySelector('i');
             icon.classList.remove('fa-play');
             icon.classList.add('fa-pause');
-        }).catch(error => {
-            // Trata erro de autoplay bloqueado (comum em navegadores móveis)
-            alert('O navegador bloqueou o início automático do áudio. Tente novamente clicando no botão.');
-            console.error("Erro ao tentar tocar o áudio:", error);
+        });
+
+        audioPlayer.addEventListener('pause', () => {
+            const icon = playPauseBtn.querySelector('i');
+            icon.classList.remove('fa-pause');
+            icon.classList.add('fa-play');
         });
     }
-
-
-    function pauseRadio() {
-        audio.pause();
-        isPlaying = false;
-        icon.classList.remove('fa-pause');
-        icon.classList.add('fa-play');
-    }
-
-
-    playPauseBtn.addEventListener('click', () => {
-        if (isPlaying) {
-            pauseRadio();
-        } else {
-            playRadio();
-        }
-    });
-
-
-    icon.classList.add('fa-play');
 });
