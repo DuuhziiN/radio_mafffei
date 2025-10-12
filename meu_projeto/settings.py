@@ -111,12 +111,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(Path(__file__).resolve().parent.parent, 'media')
 
 
+# Arquivo: meu_projeto/settings.py (NA SEÇÃO STORAGES)
+
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
+    # SOLUÇÃO FINAL: Usa o StaticFilesStorage simples para evitar o erro "Missing manifest"
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
