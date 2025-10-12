@@ -102,10 +102,12 @@ USE_TZ = True
 # Configurações de Arquivos Estáticos e Mídia
 STATIC_URL = '/static/'
 # STATIC_ROOT DEVE APONTAR PARA A PASTA DE COLETA NA RAIZ DO PROJETO
-STATIC_ROOT = Path(__file__).resolve().parent.parent / 'staticfiles' 
+STATIC_ROOT = Path(__file__).resolve().parent.parent / 'staticfiles'
 
-# REMOVIDO: STATICFILES_DIRS (Para o Render, isso confunde. O collectstatic o encontra.)
-# O Django procurará em radiomaffei/static/ automaticamente.
+# CORREÇÃO CRÍTICA: Diz ao Django para procurar na pasta 'static' da raiz
+STATICFILES_DIRS = [
+    Path(__file__).resolve().parent.parent / 'static', 
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(Path(__file__).resolve().parent.parent, 'media')
