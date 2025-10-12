@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static 
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
+# Removida a importação de staticfiles_urlpatterns para evitar conflitos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,11 +13,11 @@ urlpatterns = [
 ]
 
 # ==========================================================
-# SOLUÇÃO FINAL DE URL PARA AMBIENTE DE DESENVOLVIMENTO (DEBUG=True)
+# SOLUÇÃO FINAL DE URL PARA AMBIENTE DE PRODUÇÃO/DEV
 # ==========================================================
+
+# Mapeamento para MÍDIA (uploads de música) - Necessário em desenvolvimento
 if settings.DEBUG:
-    # 1. Mapeamento para MÍDIA (uploads de música)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
-    # 2. Mapeamento ESTÁTICO: Força o servidor a buscar nos diretórios dos APPs
-    urlpatterns += staticfiles_urlpatterns()
+# EM PRODUÇÃO (RENDER), O WHITE NOISE NO MIDDLEWARE ASSUME TODOS OS ARQUIVOS ESTÁTICOS
