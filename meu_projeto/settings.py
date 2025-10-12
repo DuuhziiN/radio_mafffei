@@ -46,7 +46,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://radio-mafffei.onrender.com',
+    'https://*.onrender.com', # Adicionado para cobrir subdomínios do Render
+]
 ROOT_URLCONF = 'meu_projeto.urls'
 
 # DIRS aponta para a pasta templates/ ao lado de settings.py
