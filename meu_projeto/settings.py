@@ -1,19 +1,19 @@
-"""
-Django settings for meu_projeto project.
-"""
+# Arquivo: meu_projeto/settings.py (NO TOPO)
 
 import os 
 from pathlib import Path
 from dotenv import load_dotenv 
 from django.urls import reverse_lazy 
 
-# Carrega variáveis de ambiente
 load_dotenv() 
 
-# BASE_DIR aponta para o diretório de configurações (meu_projeto/meu_projeto/)
-BASE_DIR = Path(__file__).resolve().parent
+# CORREÇÃO CRÍTICA: BASE_DIR DEVE APONTAR PARA A RAIZ DO PROJETO (onde manage.py está)
+BASE_DIR = Path(__file__).resolve().parent.parent 
+# Agora, todos os caminhos subsequentes serão relativos a esta RAIZ.
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
+
+# ...
 
 DEBUG = os.environ.get('DEBUG', 'False') == 'True' 
 if DEBUG:
@@ -100,15 +100,23 @@ USE_TZ = True
 # Configurações de Arquivos Estáticos e Mídia
 STATIC_URL = '/static/'
 # STATIC_ROOT aponta para a pasta de coleta na raiz do projeto (um nível acima)
+# Arquivo: meu_projeto/settings.py (NA SEÇÃO DE ARQUIVOS ESTÁTICOS)
+
+# ...
+
 STATIC_ROOT = Path(__file__).resolve().parent.parent / 'staticfiles'
 
-# CORREÇÃO CRÍTICA: Ativa a busca na pasta 'static' na raiz do projeto
+# CORREÇÃO CRÍTICA: Diz ao Django para procurar na pasta 'static' na raiz
 STATICFILES_DIRS = [
+    # Esta é a localização correta do seu diretório 'static'
     Path(__file__).resolve().parent.parent / 'static', 
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(Path(__file__).resolve().parent.parent, 'media')
+# ...
+# MEDIA_ROOT AGORA USA APENAS BASE_DIR
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 STORAGES = {
