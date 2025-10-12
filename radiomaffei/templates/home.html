@@ -1,49 +1,98 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Rádio Maffei - Ao Vivo</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>JM RÁDIO</title>
 </head>
 
 <body>
-    <h1>🎵 Rádio Maffei</h1>
-    <a href="{% url 'radiomaffei:radialista' %}">Acesso Radialista</a>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="{% static 'img/logoo.png' %}" alt="Logo">
+            </div>
+            <ul class="nav-list">
+                <li><a href="#">Sobre Nós</a></li>
+                <li><a href="#">Equipe</a></li>
+                <li><a href="#">Mídias</a></li>
+                <li><a href="#">Concursos</a></li>
+                <li><a href="#">Programas</a></li>
+                <li><a href="{% url 'radiomaffei:radialista' %}">Painel</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <hr>
-
-    <div class="player-section">
-        <h2>AO VIVO Agora!</h2>
-        <div id="live-controls">
-            <p id="status-message">Conectando ao stream...</p>
-            <audio id="audio-player" controls autoplay></audio>
+    <main>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="{% static 'img/radioequipe.jpeg' %}" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <img src="{% static 'img/radioequipe2.jpeg' %}" style="width:100%">
+            </div>
         </div>
-    </div>
+        <br>
 
-    <hr>
+        <div class="radio-player-container">
+            <div class="player-content">
 
-    <div class="playlist-section">
-        <h2>Playlist</h2>
-        <ul>
+                <div id="live-controls" style="display:none;">
+                    <audio id="audio-player" preload="auto"></audio>
+                    <p id="status-message" style="display:none;"></p>
+                </div>
+
+                <a href="#" class="player-button btn-abrir-player">ABRIR PLAYER</a>
+                <button id="play-pause-btn" class="player-button btn-play-pause">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+                <a href="#" class="player-button btn-programacao">VER PROGRAMAÇÃO</a>
+
+            </div>
+        </div>
+
+        <div class="playlist-section">
+            <h2>Músicas na Playlist</h2>
             {% for musica in musicas %}
-            <li>
-                {{ musica.titulo }} <br>
+            <div class="musica-item">
+                <p>{{ musica.titulo }}</p>
                 <audio controls>
                     <source src="{{ musica.arquivo.url }}" type="audio/mpeg">
-
-                    Seu navegador não suporta áudio.
                 </audio>
-            </li>
+            </div>
             {% empty %}
-            <li>Nenhuma música enviada ainda.</li>
+            <p>Nenhuma música gravada.</p>
             {% endfor %}
-        </ul>
-    </div>
+        </div>
+
+        <section class="video-section">
+            <div class="video-card">
+                <a href="#">
+                    <div class="video-thumbnail-wrapper">
+                        <video src="{% static 'img/IMG_6734.mov' %}" alt="Microfone" class="video-thumbnail"></video>
+                    </div>
+                    <p class="video-title">De Estudantes para Estudantes: A JM Rádio FM Chegou!</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+    </footer>
 
     {% include "audio_script.html" %}
+
+    <script src="{% static 'js/banner.js' %}"></script>
+    <script src="{% static 'js/menu.js' %}" defer></script>
+    <script src="{% static 'js/radio.js' %}" defer></script>
 
 </body>
 

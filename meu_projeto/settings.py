@@ -7,19 +7,16 @@ from pathlib import Path
 from dotenv import load_dotenv 
 from django.urls import reverse_lazy 
 
-# Carrega variáveis de ambiente
 load_dotenv() 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
 
-# Lógica final para DEBUG e ALLOWED_HOSTS (resolve o DisallowedHost)
 DEBUG = os.environ.get('DEBUG', 'False') == 'True' 
 if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 else:
-    # Em produção (Render), aceita a URL pública e qualquer outra que possa surgir
     ALLOWED_HOSTS = ['radio-mafffei.onrender.com', '*'] 
 
 INSTALLED_APPS = [
@@ -35,7 +32,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', 
+    # COMENTADO: 'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -64,10 +61,11 @@ TEMPLATES = [
 
 ASGI_APPLICATION = 'meu_projeto.asgi.application' 
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': Path(__file__).resolve().parent.parent / 'db.sqlite3',
     }
 }
 
@@ -96,18 +94,20 @@ USE_TZ = True
 
 # Configurações de Arquivos Estáticos e Mídia
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = Path(__file__).resolve().parent.parent / 'staticfiles'
+
+# A busca de estáticos agora é feita por APP_DIRS = True (default)
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Render irá salvar aqui (temporariamente)
+MEDIA_ROOT = os.path.join(Path(__file__).resolve().parent.parent, 'media')
 
 
-# CONFIGURAÇÃO CRÍTICA: REVERTE PARA ARMAZENAMENTO LOCAL E FINALIZA CONFLITOS
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
@@ -116,10 +116,7 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
     }
 }
-CSRF_TRUSTED_ORIGINS = [
-    'https://radio-mafffei.onrender.com',
-]
+
 # Configuração de Login e Logout
 LOGIN_REDIRECT_URL = reverse_lazy('radiomaffei:radialista') 
 LOGOUT_REDIRECT_URL = reverse_lazy('radiomaffei:home')
-WHITENOISE_FORCING_MEDIA_FILES = True
