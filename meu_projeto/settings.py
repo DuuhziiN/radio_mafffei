@@ -1,24 +1,26 @@
-# Arquivo: meu_projeto/settings.py (NO TOPO)
+"""
+Django settings for meu_projeto project.
+"""
 
 import os 
 from pathlib import Path
 from dotenv import load_dotenv 
 from django.urls import reverse_lazy 
 
+# Carrega variáveis de ambiente
 load_dotenv() 
 
-# CORREÇÃO CRÍTICA: BASE_DIR DEVE APONTAR PARA A RAIZ DO PROJETO (onde manage.py está)
-BASE_DIR = Path(__file__).resolve().parent.parent 
-# Agora, todos os caminhos subsequentes serão relativos a esta RAIZ.
+# BASE_DIR aponta para o diretório de configurações.
+BASE_DIR = Path(__file__).resolve().parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
 
-# ...
-
+# Lógica de DEBUG e ALLOWED_HOSTS para produção
 DEBUG = os.environ.get('DEBUG', 'False') == 'True' 
 if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 else:
+    # Em produção (Render), aceita a URL pública
     ALLOWED_HOSTS = ['radio-mafffei.onrender.com', '*'] 
 
 INSTALLED_APPS = [
@@ -34,8 +36,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # WhiteNoise COMENTADO para o teste local
-    # 'whitenoise.middleware.WhiteNoiseMiddleware', 
+    # CRÍTICO: WhiteNoise DEVE estar ativo para servir arquivos em produção
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -99,24 +101,14 @@ USE_TZ = True
 
 # Configurações de Arquivos Estáticos e Mídia
 STATIC_URL = '/static/'
-# STATIC_ROOT aponta para a pasta de coleta na raiz do projeto (um nível acima)
-# Arquivo: meu_projeto/settings.py (NA SEÇÃO DE ARQUIVOS ESTÁTICOS)
+# STATIC_ROOT DEVE APONTAR PARA A PASTA DE COLETA NA RAIZ DO PROJETO
+STATIC_ROOT = Path(__file__).resolve().parent.parent / 'staticfiles' 
 
-# ...
-
-STATIC_ROOT = Path(__file__).resolve().parent.parent / 'staticfiles'
-
-# CORREÇÃO CRÍTICA: Diz ao Django para procurar na pasta 'static' na raiz
-STATICFILES_DIRS = [
-    # Esta é a localização correta do seu diretório 'static'
-    Path(__file__).resolve().parent.parent / 'static', 
-]
+# REMOVIDO: STATICFILES_DIRS (Para o Render, isso confunde. O collectstatic o encontra.)
+# O Django procurará em radiomaffei/static/ automaticamente.
 
 MEDIA_URL = '/media/'
-# ...
-# MEDIA_ROOT AGORA USA APENAS BASE_DIR
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+MEDIA_ROOT = os.path.join(Path(__file__).resolve().parent.parent, 'media')
 
 
 STORAGES = {
@@ -124,7 +116,7 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
