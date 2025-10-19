@@ -13,15 +13,12 @@ urlpatterns = [
 ]
 
 # ==========================================================
-# SOLUÇÃO FINAL DE URL PARA AMBIENTE DE DESENVOLVIMENTO (DEBUG=True)
+# SOLUÇÃO FINAL DE URL PARA AMBIENTE DE PRODUÇÃO/DEV
+# O Render precisa desta lógica unificada
 # ==========================================================
-# Arquivo: meu_projeto/urls.py (NO FINAL)
 
+# Mapeamento ESTÁTICO (CSS/JS) - Deve ser servido sempre em produção
+urlpatterns += staticfiles_urlpatterns()
 
-# Removida a importação de staticfiles_urlpatterns para simplificar
-
+# Mapeamento para MÍDIA (uploads de música) - OBRIGATÓRIO EM DEV E PRODUÇÃO
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-if settings.DEBUG:
-    # 1. Mapeamento para MÍDIA (uploads de música) - OBRIGATÓRIO EM DEV
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
