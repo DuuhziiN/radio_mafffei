@@ -13,16 +13,13 @@ urlpatterns = [
 ]
 
 # ==========================================================
-# SOLUÇÃO FINAL DE URL PARA AMBIENTE DE DESENVOLVIMENTO (DEBUG=True)
+# SOLUÇÃO FINAL: Mapeamento de Mídia e Estáticos
 # ==========================================================
-# Arquivo: meu_projeto/urls.py (NO FINAL)
 
-
-# Removida a importação de staticfiles_urlpatterns para simplificar
-
+# Mapeamento ESTÁTICO (CSS/JS) - Usado em desenvolvimento e coletado em produção
 if settings.DEBUG:
-    # 1. Mapeamento para MÍDIA
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    
-    # 2. Mapeamento ESTÁTICO DIRETO: Usa a pasta STATICFILES_DIRS (o caminho que acabamos de configurar)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+    urlpatterns += staticfiles_urlpatterns()
+
+# Mapeamento CRÍTICO para MÍDIA (uploads de música) - DEVE SER ATIVO EM PRODUÇÃO
+# Esta linha garante que o WhiteNoise/Django sirva a pasta MEDIA.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
