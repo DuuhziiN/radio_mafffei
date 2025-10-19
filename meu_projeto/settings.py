@@ -113,7 +113,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(Path(__file__).resolve().parent.parent, 'media')
+MEDIA_ROOT = '/var/data/media'
 
 
 # Arquivo: meu_projeto/settings.py (NA SEÇÃO STORAGES)
