@@ -20,9 +20,8 @@ urlpatterns = [
 
 # Removida a importação de staticfiles_urlpatterns para simplificar
 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 if settings.DEBUG:
-    # 1. Mapeamento para MÍDIA
+    # 1. Mapeamento para MÍDIA (uploads de música) - OBRIGATÓRIO EM DEV
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    
-    # 2. Mapeamento ESTÁTICO DIRETO: Usa a pasta STATICFILES_DIRS (o caminho que acabamos de configurar)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
