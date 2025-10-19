@@ -18,7 +18,8 @@ urlpatterns = [
 # ==========================================================
 
 # Mapeamento ESTÁTICO (CSS/JS) - Deve ser servido sempre em produção
-urlpatterns += staticfiles_urlpatterns()
-
-# Mapeamento para MÍDIA (uploads de música) - OBRIGATÓRIO EM DEV E PRODUÇÃO
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+# 2. Mapeamento ESTÁTICO (CSS/JS)
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
