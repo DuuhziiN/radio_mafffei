@@ -7,8 +7,10 @@ from pathlib import Path
 from dotenv import load_dotenv 
 from django.urls import reverse_lazy 
 
+# Carrega variáveis de ambiente
 load_dotenv() 
 
+# BASE_DIR aponta para o diretório de configurações.
 BASE_DIR = Path(__file__).resolve().parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2vo!9i(av5uf@c$o5spmd21oj9)(&ak')
@@ -18,6 +20,7 @@ DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 if DEBUG:
     ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 else:
+    # Em produção (Render), aceita a URL pública
     ALLOWED_HOSTS = ['radio-mafffei.onrender.com', '*'] 
 
 INSTALLED_APPS = [
@@ -33,6 +36,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # CRÍTICO: WhiteNoise DEVE estar ativo para servir arquivos em produção
     'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -42,9 +46,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://radio-mafffei.onrender.com',
+    'https://*.onrender.com', # Adicionado para cobrir subdomínios do Render
+]
 ROOT_URLCONF = 'meu_projeto.urls'
 
+# DIRS aponta para a pasta templates/ ao lado de settings.py
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -66,6 +74,7 @@ ASGI_APPLICATION = 'meu_projeto.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
+        # Banco de dados na raiz do projeto (um nível acima)
         'NAME': Path(__file__).resolve().parent.parent / 'db.sqlite3',
     }
 }
@@ -95,7 +104,14 @@ USE_TZ = True
 
 # Configurações de Arquivos Estáticos e Mídia
 STATIC_URL = '/static/'
+# STATIC_ROOT DEVE APONTAR PARA A PASTA DE COLETA NA RAIZ DO PROJETO
 STATIC_ROOT = Path(__file__).resolve().parent.parent / 'staticfiles'
+
+# CORREÇÃO CRÍTICA: Diz ao Django para procurar na pasta 'static' da raiz
+STATICFILES_DIRS = [
+    Path(__file__).resolve().parent.parent / 'static', 
+]
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(Path(__file__).resolve().parent.parent, 'media')
 
@@ -106,9 +122,9 @@ STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
-    # CRÍTICO: Usa o ManifestStaticFilesStorage, que exige collectstatic
+    # SOLUÇÃO FINAL: Usa o StaticFilesStorage simples para evitar o erro "Missing manifest"
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
@@ -121,6 +137,5 @@ CHANNEL_LAYERS = {
 # Configuração de Login e Logout
 LOGIN_REDIRECT_URL = reverse_lazy('radiomaffei:radialista') 
 LOGOUT_REDIRECT_URL = reverse_lazy('radiomaffei:home')
-CSRF_TRUSTED_ORIGINS = [
-    'https://radio-mafffei.onrender.com',
-]
+
+WHITENOISE_FORCING_MEDIA_FILES = True
