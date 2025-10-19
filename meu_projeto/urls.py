@@ -16,7 +16,8 @@ urlpatterns = [
 # SOLUÇÃO FINAL DE URL PARA AMBIENTE DE PRODUÇÃO/DEV
 # O Render precisa desta lógica unificada
 # ==========================================================
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
 
-# Mapeamento ESTÁTICO (CSS/JS) - Deve ser servido sempre em produção
+# 2. MAPEAMENTO CRÍTICO PARA MÍDIA (FORA DO BLOCO DEBUG PARA PRODUÇÃO)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    
