@@ -17,11 +17,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-t914bv7l_f#avz^=f^q2v
 
 # Lógica de DEBUG e ALLOWED_HOSTS para produção
 DEBUG = os.environ.get('DEBUG', 'False') == 'True' 
-if DEBUG:
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-else:
-    # Em produção (Render), aceita a URL pública
-    ALLOWED_HOSTS = ['radio-mafffei.onrender.com', '*'] 
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'radio-mafffei.onrender.com', '*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
