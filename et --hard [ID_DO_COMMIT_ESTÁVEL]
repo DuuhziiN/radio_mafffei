@@ -1,0 +1,51 @@
+[33mc03dde8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m FIX: Added ASGIRF_THREAD_LIMIT to prevent Channels POST request timeouts
+[33m31ea08c[m FIX: Added ASGIRF_THREAD_LIMIT to prevent Channels POST request timeouts
+[33m763b52b[m FINAL PUSH: Code structure verified, pushing for stable Render deploy
+[33m6db5016[m FINAL FIX: Forcing deployment with explicit ALLOWED_HOSTS
+[33m46869f1[m FINAL FIX: Forced MEDIA URL mapping outside of DEBUG block for playback
+[33m7abab18[m FINAL FIX: Removed staticfiles_urlpatterns to resolve media 404 in production
+[33m30fb6bb[m FINAL FIX: Reversed URL order to prioritize MEDIA_URL
+[33m04e5732[m FINAL FIX: Cleaned URLs, applied static structure, and corrected player logic
+[33m90014b5[m FIX: Applied final persistent storage configuration for Render Starter
+[33m4ecf2ce[m FINAL FIX: Forced MEDIA_URL mapping outside of DEBUG block
+[33mea2e4de[m FINAL PUSH: Committing correct code, ignoring local static bug.
+[33m3b5e7f7[m FINAL FIX: Switched to ManifestStaticFilesStorage for production build
+[33m32fce95[m FIX: Final media serving URL outside of DEBUG block
+[33m7f8cf12[m FIX: Enabled WhiteNoise to serve MEDIA files in production (Final attempt)
+[33m9a3eba5[m FEAT: Finalized player interaction logic
+[33m98d4f75[m FINAL FIX: Structural integrity and correct static path for Render
+[33m7ed9215[m FINAL FIX: Structural integrity and correct static path for Render
+[33m74b9e71[m FIX: FINAL CSRF_TRUSTED_ORIGINS to accept Render domain
+[33m712a224[m FINAL PUSH: Committing correct code, ignoring local static bug.
+[33ma14bcc6[m FINAL FIX: Cleaned up settings and forced WhiteNoise structure
+[33m0d4e3d3[m FINAL PUSH: Committing correct configuration for Render build
+[33mbb5e6e3[m FINAL PUSH: Committing correct static path to resolve Render 404s
+[33m1d47d35[m FINAL STRUCTURAL FIX: Corrected static path and files moved to root
+[33m055b13d[m FINAL STRUCTURAL FIX: Corrected STATICFILES_DIRS path
+[33m7842881[m FINAL DEPLOY DIAGNOSIS: Pushing clean configuration for test environment
+[33m6ae97c0[m FIX: Final deployment syntax with re_path to resolve media import error
+[33m297173d[m FIX: Forced direct URL mapping for media using re_path/serve
+[33m418d501[m FIX: Final media serving configuration
+[33mb095043[m FIX: Final ALLOWED_HOSTS and CSRF TRUSTED ORIGINS
+[33m7eabb35[m FIX: Final settings structure to resolve DisallowedHost and Media Not Found
+[33mc977f34[m FIX: Final media and static URL mapping for production
+[33m6dc90c4[m FIX: Final media and static URL mapping for production
+[33m5840b12[m FIX: Enabled WhiteNoise to serve media files in production
+[33m957d71b[m FIX: Corrected settings.py indentation issue for production
+[33m050037a[m FIX: Final deployment allowed hosts to accept all in production
+[33md3442b0[m FIX: Final deployment settings and SSL proxy header
+[33m237117c[m FIX: Final deployment settings and SSL proxy header
+[33me81d170[m FIX: Final ALLOWED_HOSTS using '*' for production compatibility
+[33m705715d[m FIX: Final ALLOWED_HOSTS for Render
+[33m1db6bfd[m FIX: Final ALLOWED_HOSTS configuration for Render
+[33m32bbea4[m FIX: Hardcoded Render domain to ALLOWED_HOSTS
+[33m862519c[m FIX: Reverted media storage to local file system for Render stability
+[33m26ade4e[m FIX: Hardcoded Render domain to ALLOWED_HOSTS
+[33m0848757[m FIX: Reverted media storage to local file system for Render stability
+[33m9ded7d1[m FIX: Added Render URL to CSRF_TRUSTED_ORIGINS for login fix
+[33m6aafce5[m FIX: Configured Django environment for create_superuser script
+[33m5616db3[m FIX: Automated superuser creation for Render deploy
+[33m625aef7[m FIX: Added Render hostname detection
+[33m3b6a5ec[m FIX: Added Render hostname detection
+[33mcef022a[m FIX: Added Render URL to ALLOWED_HOSTS
+[33mb89b63c[m Initial Rádio Maffei commit
