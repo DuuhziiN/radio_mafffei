@@ -1,0 +1,23 @@
+{% extends "base_nav.html" %}
+
+{% block title %}Galeria de Mídias - JM Rádio{% endblock %}
+
+{% block content %}
+
+<section class="galeria-container">
+    <h1>Mídias e Eventos</h1>
+    <p class="sub-texto">Confira os bastidores, eventos e momentos especiais da JM Rádio FM e da comunidade escolar.</p>
+
+    <div class="galeria-grid">
+        {% for foto in galeria %}
+        <div class="galeria-item">
+            <img src="{% static foto %}" alt="Imagem de Evento">
+        </div>
+        {% empty %}
+        <p>Nenhuma foto de mídia disponível no momento.</p>
+        {% endfor %}
+    </div>
+
+
+</section>
+{% endblock %}

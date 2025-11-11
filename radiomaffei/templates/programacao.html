@@ -1,0 +1,88 @@
+{% extends "base_nav.html" %}
+
+{% block title %}Programação da Rádio JM{% endblock %}
+
+{% block content %}
+
+<section class="programa-content">
+    <div class="header-programa">
+        <h1>PROGRAMAÇÃO</h1>
+        <p class="sub-texto">A JM Radio FM está no ar para animar seus intervalos, recreios e momentos especiais com uma
+            programação feita por alunos, para alunos!</p>
+    </div>
+
+    <div class="tabela-programacao">
+        <h2>Grade de Transmissão Semanal</h2>
+
+        <!-- Tabulação para responsividade em dias da semana -->
+        <div class="programacao-tabs-container">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-dia="segunda">Segunda</button>
+                <button class="tab-btn" data-dia="terca">Terça</button>
+                <button class="tab-btn" data-dia="quarta">Quarta</button>
+                <button class="tab-btn" data-dia="quinta">Quinta</button>
+                <button class="tab-btn" data-dia="sexta">Sexta</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="segunda" class="conteudo-dia active">
+                    <p>Música Gospel <span>08:00/08:30</span></p>
+                    <p>Sertanejo Universitário <span>08:31/10:00</span></p>
+                    <p>Rock Brasileiro <span>10:01/11:00</span></p>
+                    <p>Rock <span>11:01/11:30</span></p>
+                    <p>Pop <span>11:31/12:00</span></p>
+                    <p>Informativo <span>12:01/12:15</span></p>
+                    <p>Modão Raiz <span>12:16/14:00</span></p>
+                    <p>MPB <span>14:05/15:30</span></p>
+                    <p>Forró, Pagode e Samba <span>15:31/16:45</span></p>
+                </div>
+
+                <!-- Conteúdo dos outros dias seria similar aqui -->
+                <div id="terca" class="conteudo-dia">
+                    <p>Terça: Programação a definir...</p>
+                </div>
+                <div id="quarta" class="conteudo-dia">
+                    <p>Quarta: Programação a definir...</p>
+                </div>
+                <div id="quinta" class="conteudo-dia">
+                    <p>Quinta: Programação a definir...</p>
+                </div>
+                <div id="sexta" class="conteudo-dia">
+                    <p>Sexta: Programação a definir...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="slogan-grande">EDUCAÇÃO INTEGRAL EM SINTONIA TOTAL!</h1>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+    // Lógica para alternar as abas da programação
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const contents = document.querySelectorAll('.conteudo-dia');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove a classe 'active' de todos
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // Adiciona a classe 'active' ao botão clicado
+                tab.classList.add('active');
+
+                // Ativa o conteúdo correspondente
+                const targetId = tab.getAttribute('data-dia');
+                const target = document.getElementById(targetId);
+                if (target) target.classList.add('active');
+            });
+        });
+    });
+</script>
+
+{% endblock %}

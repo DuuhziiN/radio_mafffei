@@ -1,99 +1,93 @@
+{% extends "base_nav.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, width=device-width">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% block title %}JM RÁDIO - Início{% endblock %}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>JM RÁDIO</title>
-</head>
+{% block content %}
 
-<body>
-    <header>
-        <nav>
-            <div class="logo-container">
-                <img src="{% static 'img/logoo.png' %}" alt="Logo">
-            </div>
-            <ul class="nav-list">
-                <li><a href="#">Sobre Nós</a></li>
-                <li><a href="#">Equipe</a></li>
-                <li><a href="#">Mídias</a></li>
-                <li><a href="#">Concursos</a></li>
-                <li><a href="#">Programas</a></li>
-                <li><a href="{% url 'radiomaffei:radialista' %}">Painel</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- SEÇÃO SLIDESHOW -->
 
-    <main>
-        <div class="slideshow-container">
-            <div class="mySlides fade">
-                <img src="{% static 'img/radioequipe.jpeg' %}" style="width:100%">
-            </div>
-            <div class="mySlides fade">
-                <img src="{% static 'img/radioequipe2.jpeg' %}" style="width:100%">
-            </div>
+<div class="slideshow-container">
+    <div class="mySlides fade">
+        <img src="{% static 'img/radioequipe.jpeg' %}" style="width:100%">
+    </div>
+    <div class="mySlides fade">
+        <img src="{% static 'img/radioequipe2.jpeg' %}" style="width:100%">
+    </div>
+</div>
+
+
+
+
+<div class="radio-player-container">
+    <div class="player-content">
+
+        <!-- CONTROLES ESTILIZADOS (Integração com o radio.js) -->
+        <a href="#" class="player-button btn-abrir-player">ABRIR PLAYER</a>
+        <button id="play-pause-btn" class="player-button btn-play-pause">
+            <i class="fa-solid fa-play"></i>
+        </button>
+        <a href="{% url 'radiomaffei:programacao' %}" class="player-button btn-programacao">VER PROGRAMAÇÃO</a>
+
+        <!-- PLAYER DE STREAMING AO VIVO (USADO PELO CHANNELS) -->
+        <div id="live-controls" style="display:none;">
+            <audio id="audio-player" preload="auto"></audio>
+            <p id="status-message" style="display:none;"></p>
         </div>
-        <br>
+    </div>
 
-        <div class="radio-player-container">
-            <div class="player-content">
 
-                <a href="#" class="player-button btn-abrir-player">ABRIR PLAYER</a>
-                <button id="play-pause-btn" class="player-button btn-play-pause">
-                    <i class="fa-solid fa-play"></i>
-                </button>
-                <a href="#" class="player-button btn-programacao">VER PROGRAMAÇÃO</a>
+</div>
 
-                <div id="live-controls" style="display:none;">
-                    <audio id="audio-player" preload="auto"></audio>
-                    <p id="status-message" style="display:none;"></p>
+<!-- PLAYLIST DE MÚSICAS GRAVADAS -->
+
+<div class="playlist-section">
+    <h2>Músicas na Playlist</h2>
+    {% for musica in musicas %}
+    <div class="musica-item">
+        <p>{{ musica.titulo }}</p>
+        <audio controls>
+            <source src="{{ musica.arquivo.url }}" type="audio/mpeg">
+        </audio>
+    </div>
+    {% empty %}
+    <p>Nenhuma música gravada.</p>
+    {% endfor %}
+</div>
+
+<!-- SEÇÃO DE VÍDEOS -->
+
+<section class="video-section">
+    <div class="video-header">
+        <h1>Explore nossos vídeos e mergulhe no entretenimento</h1>
+    </div>
+    <div class="video-gallery">
+        <div class="video-card">
+            <a href="#">
+                <div class="video-thumbnail-wrapper">
+                    <video src="{% static 'img/IMG_6734.mov' %}" alt="Microfone" class="video-thumbnail"></video>
                 </div>
-
-            </div>
+                <p class="video-title">De Estudantes para Estudantes: A JM Rádio FM Chegou!</p>
+            </a>
         </div>
-
-        <div class="playlist-section">
-            <h2>Músicas na Playlist</h2>
-            {% for musica in musicas %}
-            <div class="musica-item">
-                <p>{{ musica.titulo }}</p>
-                <audio controls>
-                    <source src="{{ musica.arquivo.url }}" type="audio/mpeg">
-                </audio>
-            </div>
-            {% empty %}
-            <p>Nenhuma música gravada.</p>
-            {% endfor %}
+        <!-- Cards de vídeo adicionais (aqui você repetiria o bloco) -->
+        <div class="video-card">
+            <a href="#">
+                <div class="video-thumbnail-wrapper">
+                    <video src="{% static 'img/VIDEO-2025-09-11-08-48-08.mp4' %}" alt="Grupo de alunos"
+                        class="video-thumbnail"></video>
+                </div>
+                <p class="video-title">Competição de Foguetes!</p>
+            </a>
         </div>
+    </div>
+</section>
+{% endblock %}
 
-        <section class="video-section">
-            <div class="video-card">
-                <a href="#">
-                    <div class="video-thumbnail-wrapper">
-                        <video src="{% static 'img/IMG_6734.mov' %}" alt="Microfone" class="video-thumbnail"></video>
-                    </div>
-                    <p class="video-title">De Estudantes para Estudantes: A JM Rádio FM Chegou!</p>
-                </a>
-            </div>
-        </section>
+{% block extra_js %}
 
-    </main>
+<!-- Adiciona o script de animação do banner (mantendo a funcionalidade) -->
 
-    <footer class="rodape">
-    </footer>
+<script src="{% static 'js/banner.js' %}"></script>
 
-    {% include "audio_script.html" %}
-
-    <script src="{% static 'js/banner.js' %}"></script>
-    <script src="{% static 'js/menu.js' %}" defer></script>
-    <script src="{% static 'js/radio.js' %}" defer></script>
-
-</body>
-
-</html>
+{% endblock %}

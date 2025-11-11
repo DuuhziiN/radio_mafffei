@@ -1,0 +1,49 @@
+{% extends "base_nav.html" %}
+
+{% block title %}Sobre Nós - JM Rádio{% endblock %}
+
+{% block content %}
+
+<section class="sobre-nos-container">
+    <h1>Sobre a JM Rádio FM</h1>
+
+    <div class="bloco-info reverso">
+        <div class="texto-coluna">
+            <h2>Nossa História e Visão</h2>
+            <p>A JM Rádio FM nasceu da iniciativa de alunos e professores da Escola Estadual João Maffei, com o objetivo
+                de promover a educação integral, comunicação e cultura entre a comunidade escolar e local. Somos mais do
+                que uma rádio; somos um laboratório de talentos, uma voz para os estudantes e um meio de conectar a
+                escola com o mundo.</p>
+        </div>
+        <div class="imagem-coluna">
+            <img src="{% static 'img/radio_estudio.jpeg' %}" alt="Estúdio de rádio">
+        </div>
+    </div>
+
+    <div class="bloco-info">
+        <div class="imagem-coluna">
+            <img src="{% static 'img/radio_alunos.jpeg' %}" alt="Alunos trabalhando na rádio">
+        </div>
+        <div class="texto-coluna">
+            <h2>Nosso Compromisso com a Comunidade</h2>
+            <p>Priorizamos conteúdos informativos, educativos e culturais. Nossa programação é feita de aluno para
+                aluno, abrangendo todos os gêneros musicais, entrevistas, notícias locais e participação da comunidade.
+                Acreditamos no poder da comunicação responsável e na importância de dar voz a todas as ideias.</p>
+        </div>
+    </div>
+
+    <div class="bloco-info reverso">
+        <div class="texto-coluna">
+            <h2>Educação e Tecnologia</h2>
+            <p>A rádio é uma ferramenta de aprendizado prático, onde os alunos desenvolvem habilidades em comunicação,
+                produção de conteúdo, edição de áudio e tecnologia. O projeto integra o currículo escolar e promove o
+                protagonismo juvenil, preparando os estudantes para o futuro digital.</p>
+        </div>
+        <div class="imagem-coluna">
+            <img src="{% static 'img/radio_tecnologia.jpeg' %}" alt="Equipamento de transmissão">
+        </div>
+    </div>
+
+
+</section>
+{% endblock %}

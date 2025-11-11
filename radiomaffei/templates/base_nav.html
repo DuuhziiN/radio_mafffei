@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, width=device-width">
+    <!-- O estilo CSS do index será a base para todas as novas páginas -->
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>{% block title %}JM RÁDIO{% endblock %}</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="{% static 'img/logoo.png' %}" alt="Logo">
+            </div>
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <ul class="nav-list">
+                <li><a href="{% url 'radiomaffei:sobre_nos' %}">Sobre Nós</a></li>
+                <li><a href="{% url 'radiomaffei:equipe' %}">Equipe</a></li>
+                <li><a href="{% url 'radiomaffei:midias' %}">Mídias</a></li>
+                <li><a href="{% url 'radiomaffei:concursos_programas' %}">Concursos</a></li>
+                <li><a href="{% url 'radiomaffei:programacao' %}">Programação</a></li>
+                <li><a href="{% url 'radiomaffei:radialista' %}">Painel</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Conteúdo específico da página vai aqui -->
+        {% endblock %}
+    </main>
+
+    <footer class="rodape">
+        <!-- Seu código de rodapé com tags {% static %} corrigidas -->
+        <div class="rodape-conteudo">
+            <div class="rodape-coluna rodape-col-logo">
+                <img src="{% static 'img/logooficial.jpeg' %}" alt="Logo JmRádio" class="logo-jmradio-maior">
+                <p class="slogan">A Educação Integral em Sintonia Total!</p>
+            </div>
+            <div class="rodape-coluna rodape-col-contatos">
+                <h3 class="contato-titulo">Nossos contatos</h3>
+                <div class="contato-item">
+                    <p><strong>Endereço:</strong></p>
+                    <p>R. Tamôios, 2454 - Centro, Juranda - PR</p>
+                </div>
+                <div class="contato-item">
+                    <p><strong>E-mail:</strong></p>
+                    <p>jmradio.maffei@gmail.com.br</p>
+                </div>
+                <img src="{% static 'img/maffei.png' %}" alt="Logo JmRádio" class="logo-jmradio-menor">
+            </div>
+            <div class="rodape-coluna rodape-col-social-parana">
+                <h3 class="redes-titulo">REDES SOCIAIS</h3>
+                <div class="social-icons-rodape">
+                    <!-- Ícones de redes sociais devem ser tratados via CSS ou SVGs -->
+                    <a href="URL_FACEBOOK" class="icon-social-rodape facebook-rodape" aria-label="Facebook"></a>
+                    <a href="URL_INSTAGRAM" class="icon-social-rodape instagram-rodape" aria-label="Instagram"></a>
+                    <a href="URL_YOUTUBE" class="icon-social-rodape youtube-rodape" aria-label="YouTube"></a>
+                </div>
+                <img src="{% static 'img/paranaintegral.png' %}" alt="Logo Paraná Integral"
+                    class="logo-parana-integral">
+            </div>
+        </div>
+    </footer>
+
+    <!-- Inclui scripts de funcionalidade que devem rodar em todas as páginas -->
+    <script src="{% static 'js/menu.js' %}" defer></script>
+    <script src="{% static 'js/radio.js' %}" defer></script>
+    {% block extra_js %}{% endblock %}
+
+
+</body>
+
+</html>

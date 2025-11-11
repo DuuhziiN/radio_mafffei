@@ -13,4 +13,9 @@ urlpatterns = [
     
     # 3. Rota para Deletar Música (aceita o ID da música)
     path('deletar/<int:musica_id>/', views.deletar_musica, name='deletar_musica'),
+    path('programacao/', views.programacao, name='programacao'),
+    path('sobre/', views.sobre_nos, name='sobre_nos'),
+    path('equipe/', views.equipe, name='equipe'),
+    path('midias/', views.midias, name='midias'),
+    path('concursos/', views.concursos_programas, name='concursos_programas'),
 ]

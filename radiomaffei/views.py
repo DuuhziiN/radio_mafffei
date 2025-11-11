@@ -48,3 +48,33 @@ def deletar_musica(request, musica_id):
         return redirect('radiomaffei:radialista')
         
     return redirect('radiomaffei:radialista')
+
+def programacao(request):
+    # Esta view pode ser usada para passar dados de programação no futuro
+    return render(request, 'programacao.html')
+
+def sobre_nos(request):
+    return render(request, 'sobre_nos.html')
+
+def equipe(request):
+    # Dados de exemplo para a equipe
+    equipe_membros = [
+        {'nome': 'Alicya', 'foto': 'img/equipe/Alicya.jpg'},
+        {'nome': 'Emanuelly', 'foto': 'img/equipe/Emanuelly.jpg'},
+        {'nome': 'Italo', 'foto': 'img/equipe/Italo.jpg'},
+        {'nome': 'Luiz B.', 'foto': 'img/equipe/LuizB.jpg'},
+        {'nome': 'Marla', 'foto': 'img/equipe/Marla.jpg'},
+        {'nome': 'Nicolly', 'foto': 'img/equipe/nicolly.jpg'},
+    ]
+    return render(request, 'equipe.html', {'membros': equipe_membros})
+
+def midias(request):
+    # Lista de URLs de imagens/mídia de exemplo para a página
+    galeria_midia = [
+        'img/midia/evento1.jpeg', 'img/midia/evento2.jpeg', 'img/midia/evento3.jpeg',
+        'img/midia/evento4.jpeg', 'img/midia/evento5.jpeg', 
+    ]
+    return render(request, 'midias.html', {'galeria': galeria_midia})
+
+def concursos_programas(request):
+    return render(request, 'concursos_programas.html')

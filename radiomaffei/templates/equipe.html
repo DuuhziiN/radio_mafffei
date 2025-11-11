@@ -1,0 +1,28 @@
+{% extends "base_nav.html" %}
+
+{% block title %}Nossa Equipe - JM Rádio{% endblock %}
+
+{% block content %}
+
+<section class="equipe-container">
+    <h1>Conheça Nossos Talentos</h1>
+    <p class="sub-texto">A equipe da JM Rádio é formada por alunos dedicados que dão vida à nossa programação e
+        conteúdos.</p>
+
+    <div class="equipe-galeria">
+        {% for membro in membros %}
+        <div class="membro-card">
+            <div class="membro-foto-wrapper">
+                <img src="{% static membro.foto %}" alt="Foto de {{ membro.nome }}">
+            </div>
+            <h3 class="membro-nome">{{ membro.nome }}</h3>
+            <p class="membro-funcao">Radialista / Produção</p>
+        </div>
+        {% empty %}
+        <p>Dados da equipe não disponíveis.</p>
+        {% endfor %}
+    </div>
+
+
+</section>
+{% endblock %}
