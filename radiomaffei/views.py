@@ -59,22 +59,22 @@ def sobre_nos(request):
 def equipe(request):
     # Dados de exemplo para a equipe
     equipe_membros = [
-        {'nome': 'Alicya', 'foto': 'img/equipe/Alicya.jpg'},
-        {'nome': 'Emanuelly', 'foto': 'img/equipe/Emanuelly.jpg'},
-        {'nome': 'Italo', 'foto': 'img/equipe/Italo.jpg'},
-        {'nome': 'Luiz B.', 'foto': 'img/equipe/LuizB.jpg'},
-        {'nome': 'Marla', 'foto': 'img/equipe/Marla.jpg'},
-        {'nome': 'Nicolly', 'foto': 'img/equipe/nicolly.jpg'},
+        {'nome': 'Alicya', 'foto': 'img/Alicya.jpg'},
+        {'nome': 'Emanuelly', 'foto': 'img/Emanuelly.jpg'},
+        {'nome': 'Italo', 'foto': 'img/Italo.jpg'},
+        {'nome': 'Luiz B.', 'foto': 'img/LuizB.jpg'},
+        {'nome': 'Marla', 'foto': 'img/Marla.jpg'},
+        {'nome': 'Nicolly', 'foto': 'img/nicolly.jpg'},
     ]
     return render(request, 'equipe.html', {'membros': equipe_membros})
 
 def midias(request):
     # Lista de URLs de imagens/mídia de exemplo para a página
     galeria_midia = [
-        'img/midia/evento1.jpeg', 'img/midia/evento2.jpeg', 'img/midia/evento3.jpeg',
-        'img/midia/evento4.jpeg', 'img/midia/evento5.jpeg', 
+        'img/evento1.jpeg', 'img/evento2.jpeg', 'img/evento3.jpeg',
+        'img/evento4.jpeg', 'img/evento5.jpeg', 
     ]
     return render(request, 'midias.html', {'galeria': galeria_midia})
 
-def concursos_programas(request):
-    return render(request, 'concursos_programas.html')
+def concursos(request):
+    return render(request, 'concursos.html')
