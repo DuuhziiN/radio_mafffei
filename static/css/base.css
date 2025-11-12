@@ -1,15 +1,13 @@
-/* ARQUIVO: radiomaffei/static/css/base.css (ESTILOS ESSENCIAIS E RODAPÉ CORRIGIDO) */
+/* ARQUIVO: radiomaffei/static/css/base.css (RODAPÉ E ALINHAMENTO GLOBAL) */
 
-/* --- VARIÁVEIS E BASE GERAL --- */
+/* --- VARIÁVEIS E BASE GERAL (DEVE SER MANTIDO O QUE VOCÊ JÁ TEM) --- */
 :root {
     --roxo-fundo: #470154;
     --roxo-card: #600474;
     --roxo-claro: #9406b4;
     --cor-texto: white;
     --cor-destaque: #fa0daf;
-    /* Pink Neon */
     --color-primary: #fcd513;
-    /* Amarelo (Destaque) */
     --preto-escuro: #1a0022;
     --verde-principal: #33a330;
     --vermelho-principal: #cc3333;
@@ -38,7 +36,6 @@ body {
 main {
     flex-grow: 1;
     padding-top: 8vh;
-    /* Espaço para o cabeçalho nav fixo */
     padding-bottom: 50px;
     max-width: 1200px;
     width: 100%;
@@ -87,6 +84,7 @@ header nav {
     font-weight: 500;
 }
 
+
 /* --- ESTILOS DO RODAPÉ (CORREÇÃO DE PROPORÇÃO) --- */
 
 .rodape {
@@ -104,34 +102,27 @@ header nav {
     margin: 0 auto;
     flex-wrap: wrap;
     align-items: flex-start;
-    /* Alinhamento ao topo */
 }
 
 .rodape-coluna {
     padding: 15px;
     flex-basis: 30%;
-    /* Ajusta a largura base para 3 colunas */
+    /* Garante proporção de 3 colunas */
     min-width: 280px;
-    /* Garante que não fique muito estreito em desktop */
 }
 
-/* Tamanho Padrão para TODOS os Logos do Rodapé */
+/* CORREÇÃO CRÍTICA DAS IMAGENS DO RODAPÉ */
 .logo-jmradio-maior,
 .logo-jmradio-menor,
 .logo-parana-integral {
-    max-width: 100%;
+    max-width: 150px;
+    /* Limita o tamanho das imagens para que não fiquem gigantes */
     height: auto;
     display: block;
 }
 
-/* Alinhamento de Logos */
-.rodape-col-logo {
-    text-align: left;
-}
-
 .logo-parana-integral {
     max-width: 180px;
-    /* Tamanho específico para este logo */
     margin-left: auto;
     margin-top: 20px;
 }
@@ -165,7 +156,7 @@ header nav {
     }
 
     .logo-parana-integral {
-        margin-left: auto;
-        margin-right: auto;
+        margin: 20px auto 0;
+        /* Centraliza o logo em mobile */
     }
 }

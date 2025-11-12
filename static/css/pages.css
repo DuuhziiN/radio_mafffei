@@ -1,6 +1,4 @@
-/* ARQUIVO: radiomaffei/static/css/pages.css (ESTILOS PARA PÁGINAS SECUNDÁRIAS E PROGRAMAÇÃO) */
-
-/* --- LAYOUTS DE CONTEÚDO (APLICADO A PROGRAMAÇÃO, SOBRE, ETC.) --- */
+/* ARQUIVO: radiomaffei/static/css/pages.css (CORREÇÃO DA PROGRAMAÇÃO E LAYOUTS SECUNDÁRIOS) */
 
 .programa-content,
 .sobre-nos-container,
@@ -28,7 +26,7 @@ h2 {
 }
 
 
-/* --- CORREÇÃO DA TABELA DE PROGRAMAÇÃO --- */
+/* --- CORREÇÃO DA TABELA DE PROGRAMAÇÃO (ABA) --- */
 
 .programacao-tabs-container {
     background-color: var(--roxo-card);
@@ -41,7 +39,6 @@ h2 {
 .tabs-header {
     display: flex;
     overflow-x: auto;
-    /* Permite rolar em mobile */
     border-bottom: 2px solid var(--roxo-claro);
     margin-bottom: 20px;
 }
@@ -65,7 +62,7 @@ h2 {
 .conteudo-dia p {
     display: flex;
     justify-content: space-between;
-    /* Alinha o horário à direita */
+    /* CRÍTICO: Alinha o horário à direita */
     padding: 10px 0;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
     font-size: 1.1em;
@@ -74,11 +71,10 @@ h2 {
 .conteudo-dia span {
     font-weight: bold;
     color: var(--color-primary);
-    /* Amarelo */
 }
 
 
-/* --- ESTILOS DE GALERIA E IMAGENS (EQUIPE, MÍDIAS) --- */
+/* --- ESTILOS DE GALERIA DE IMAGENS E BLOCOS --- */
 
 .equipe-galeria,
 .galeria-grid {
@@ -88,34 +84,18 @@ h2 {
     margin-top: 20px;
 }
 
-.membro-card,
-.galeria-item {
-    background-color: var(--roxo-fundo);
+.bloco-info {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 60px;
+    background-color: var(--roxo-card);
+    padding: 25px;
     border-radius: 10px;
-    padding: 15px;
-    text-align: center;
 }
 
-.membro-foto-wrapper img,
-.galeria-item img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+.bloco-info img {
+    max-width: 100%;
     border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-/* Responsividade de Alinhamento para Conteúdo */
-@media (max-width: 768px) {
-
-    .bloco-info,
-    .rodape-conteudo {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .bloco-info.reverso {
-        flex-direction: column;
-        /* Desativa a reversão em mobile */
-    }
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
