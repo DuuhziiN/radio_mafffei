@@ -88,48 +88,36 @@ nav {
 
 /* CORREÇÃO DO SLIDESHOW: Estabiliza a altura para evitar pulos */
 .slideshow-container {
-    max-width: 100%;
     position: relative;
-    margin: auto;
+    width: 90%;
+    margin: 40px auto 0;
+    height: 400px;
+    /* ALTURA FIXA */
     overflow: hidden;
-    /* CRÍTICO: Previne que o fade out cause scroll */
     border-radius: 10px;
-}
-
-.mySlides {
-    display: none;
-    width: 100%;
-    max-height: 50vh;
-    /* Limita a altura em mobile para não ser muito grande */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 
 .mySlides img {
-    width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Garante que a imagem preencha sem distorcer */
-    border-radius: 10px;
 }
+
 
 /* --- ESTILOS DO PLAYER PRINCIPAL --- */
 
 .radio-player-container {
-    padding: 20px;
-    text-align: center;
-    background-color: var(--roxo-card);
-    border-radius: 10px;
-    margin-top: 20px;
-}
-
-.player-content {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    /* CRÍTICO: Permite quebrar em nova linha em mobile */
-    gap: 15px;
+    width: 90%;
+    margin: 20px auto;
+    background-color: var(--roxo-card);
+    border: 5px solid var(--cor-destaque);
+    border-radius: 82px;
+    box-sizing: border-box;
+    height: 120px;
 }
-
 
 .btn-play-pause {
     /* BOTÃO ESTILIZADO DE STREAMING */
@@ -150,9 +138,11 @@ nav {
 }
 
 .video-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: flex;
+    justify-content: center;
     gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
 }
 
 .video-card {
@@ -170,7 +160,9 @@ nav {
 
 .video-thumbnail {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    /* GARANTE QUE A IMAGEM/VÍDEO PREENCHA O ESPAÇO */
 }
 
 
@@ -186,18 +178,8 @@ nav {
     height: auto;
 }
 
-@media (max-width:600px) {
-    .player-content {
-        flex-direction: column;
-        /* Empilha botões em mobile */
-        gap: 10px;
-    }
-
-    .player-button {
-        width: 80%;
-        /* Botões maiores em mobile */
-        font-size: 1rem;
-    }
+@media (max-width: 768px) {
+    /* ... (Estilos de responsividade) ... */
 }
 
 
