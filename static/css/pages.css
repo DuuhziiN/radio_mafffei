@@ -61,7 +61,6 @@ h2 {
 }
 
 .conteudo-dia {
-    /* Exibe apenas o dia ativo */
     display: none;
 }
 
@@ -81,12 +80,11 @@ h2 {
 .conteudo-dia span {
     font-weight: bold;
     color: var(--color-primary);
-    /* Garante que o horário não quebre a linha em mobile */
     white-space: nowrap;
 }
 
 
-/* --- ESTILOS DE GALERIA DE IMAGENS E BLOCOS --- */
+/* --- ESTILOS DE GALERIA E IMAGENS (EQUIPE, MÍDIAS) --- */
 
 .equipe-galeria,
 .galeria-grid {

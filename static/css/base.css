@@ -98,7 +98,6 @@ header nav {
 .rodape-conteudo {
     display: flex;
     justify-content: space-between;
-    /* Distribui o espaço entre os elementos */
     max-width: 1200px;
     margin: 0 auto;
     flex-wrap: wrap;
@@ -123,26 +122,27 @@ header nav {
 .logo-jmradio-maior,
 .logo-jmradio-menor,
 .logo-parana-integral {
-    max-width: 100%;
+    max-width: 150px;
+    /* Limita o tamanho das imagens */
     height: auto;
     display: block;
-    margin-bottom: 10px;
 }
 
 .logo-parana-integral {
     max-width: 180px;
     margin-top: 20px;
+    margin-left: auto;
 }
 
 .social-icons-rodape {
     display: flex;
     gap: 15px;
     margin-top: 15px;
+    justify-content: flex-start;
 }
 
-.social-icons-rodape a {
-    font-size: 1.5em;
-    color: var(--cor-destaque);
+.rodape-col-social-parana {
+    text-align: right;
 }
 
 /* Responsividade para o Rodapé */
@@ -169,6 +169,5 @@ header nav {
 
     .rodape-col-social-parana {
         text-align: center;
-        /* Garante que todos os elementos sejam centralizados */
     }
 }
