@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <!-- Linka o CSS do novo tema -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <link rel="stylesheet" href="{% static 'css/index.css' %}" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -54,12 +53,14 @@
 
                 <!-- CONTROLES ESTILIZADOS -->
                 <a href="{% url 'radiomaffei:programacao' %}" class="player-button btn-abrir-player">VER PROGRAMAÇÃO</a>
+
+                <!-- BOTÃO CRÍTICO: Dispara o streaming (radio.js) -->
                 <button id="play-pause-btn" class="player-button btn-play-pause">
                     <i class="fa-solid fa-play"></i>
                 </button>
                 <a href="{% url 'radiomaffei:radialista' %}" class="player-button btn-programacao">PAINEL RADIALISTA</a>
 
-                <!-- PLAYER DE STREAMING AO VIVO (USADO PELO CHANNELS) -->
+                <!-- PLAYER DE STREAMING AO VIVO (USADO PELO CHANNELS - ESCONDIDO) -->
                 <div id="live-controls" style="display:none;">
                     <audio id="audio-player" preload="auto"></audio>
                     <p id="status-message" style="display:none;"></p>
@@ -74,6 +75,7 @@
             {% for musica in musicas %}
             <div class="musica-item">
                 <p>{{ musica.titulo }}</p>
+                <!-- O player nativo está sendo usado para as músicas gravadas -->
                 <audio controls>
                     <source src="{{ musica.arquivo.url }}" type="audio/mpeg">
                 </audio>
@@ -83,27 +85,32 @@
             {% endfor %}
         </div>
 
-        <!-- SEÇÃO DE VÍDEOS (CORRIGIDA) -->
+        <!-- SEÇÃO DE VÍDEOS -->
         <section class="video-section">
-            <div class="video-card">
-                <a href="#">
-                    <div class="video-thumbnail-wrapper">
-                        <video src="{% static 'img/IMG_6734.mov' %}" alt="Microfone" class="video-thumbnail" controls
-                            playsinline muted
-                            onerror="this.parentNode.innerHTML='Vídeo indisponível ou formato (.mov) não suportado.'"></video>
-                    </div>
-                    <p class="video-title">De Estudantes para Estudantes: A JM Rádio FM Chegou!</p>
-                </a>
+            <div class="video-header">
+                <h1>Explore nossos vídeos e mergulhe no entretenimento</h1>
             </div>
-            <div class="video-card">
-                <a href="#">
-                    <div class="video-thumbnail-wrapper">
-                        <video src="{% static 'img/VIDEO-2025-09-11-08-48-08.mp4' %}" alt="Grupo de alunos"
-                            class="video-thumbnail" controls playsinline muted
-                            onerror="this.parentNode.innerHTML='Vídeo indisponível ou formato (.mp4) não suportado.'"></video>
-                    </div>
-                    <p class="video-title">Competição de Foguetes!</p>
-                </a>
+            <div class="video-gallery">
+                <div class="video-card">
+                    <a href="#">
+                        <div class="video-thumbnail-wrapper">
+                            <video src="{% static 'img/IMG_6734.mov' %}" alt="Microfone" class="video-thumbnail"
+                                controls playsinline muted
+                                onerror="this.parentNode.innerHTML='Vídeo indisponível ou formato (.mov) não suportado.'"></video>
+                        </div>
+                        <p class="video-title">De Estudantes para Estudantes: A JM Rádio FM Chegou!</p>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="#">
+                        <div class="video-thumbnail-wrapper">
+                            <video src="{% static 'img/VIDEO-2025-09-11-08-48-08.mp4' %}" alt="Grupo de alunos"
+                                class="video-thumbnail" controls playsinline muted
+                                onerror="this.parentNode.innerHTML='Vídeo indisponível ou formato (.mp4) não suportado.'"></video>
+                        </div>
+                        <p class="video-title">Competição de Foguetes!</p>
+                    </a>
+                </div>
             </div>
         </section>
 
