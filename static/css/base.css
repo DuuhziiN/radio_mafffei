@@ -1,4 +1,4 @@
-/* ARQUIVO: radiomaffei/static/css/base.css (BASE PARA TODAS AS PÁGINAS) */
+/* ARQUIVO: radiomaffei/static/css/base.css (ESTILOS ESSENCIAIS PARA TODAS AS PÁGINAS) */
 
 :root {
     --roxo-fundo: #470154;
@@ -9,12 +9,9 @@
     /* Pink Neon */
     --color-primary: #fcd513;
     /* Amarelo (Destaque) */
-    --color-secondary: #d9d9d9;
     --preto-escuro: #1a0022;
     --verde-principal: #33a330;
-    /* Botões de Ação */
     --vermelho-principal: #cc3333;
-    /* Botões de Deletar */
 }
 
 * {
@@ -27,7 +24,7 @@
 
 /* FUNDO E LAYOUT PRINCIPAL */
 body {
-    /* Gradiente roxo/pink vibrante */
+    /* Gradiente Roxo/Pink */
     background: linear-gradient(180deg, #40024e, #470356 0.01%, #600474 33.65%, var(--roxo-claro) 38.46%, #b013b7 58.65%, #c41dba 71.88%, var(--cor-destaque) 85.05%, #fb1ab4 90.23%, #ff39c0 97.12%);
     background-attachment: fixed;
     color: var(--cor-texto);
@@ -42,9 +39,10 @@ main {
     flex-grow: 1;
     padding-top: 8vh;
     /* Espaço para o cabeçalho nav fixo */
-    max-width: 1400px;
-    margin: 0 auto;
+    padding-bottom: 50px;
+    max-width: 1200px;
     width: 100%;
+    margin: 0 auto;
 }
 
 a {
@@ -58,19 +56,39 @@ a:hover {
     color: var(--cor-destaque);
 }
 
-h1,
-h2 {
-    color: var(--cor-destaque);
-    margin: 15px 0;
+/* --- CORREÇÃO CRÍTICA DO CABEÇALHO --- */
+header nav {
+    display: flex;
+    justify-content: space-between;
+    /* Espaço entre logo e lista */
+    align-items: center;
+    background: #350a3f;
+    height: 8vh;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    padding: 0 5%;
 }
 
-/* --- ESTILOS DO RODAPÉ (Geral) --- */
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    /* Espaçamento entre as opções */
+    margin: 0;
+    padding: 0;
+}
+
+.logo-container img {
+    height: 40px;
+}
+
+/* --- Estilos do Rodapé --- */
 .rodape {
     background-color: black;
     color: white;
     padding: 30px 20px 10px;
-    line-height: 1.5;
-    margin-top: 40px;
 }
 
 .rodape-conteudo {
@@ -87,28 +105,16 @@ h2 {
     min-width: 250px;
 }
 
-.logo-parana-integral,
+/* Correções de Imagem do Rodapé */
 .logo-jmradio-maior,
-.logo-jmradio-menor {
-    max-width: 150px;
+.logo-jmradio-menor,
+.logo-parana-integral {
+    max-width: 100%;
     height: auto;
     display: block;
 }
 
-/* --- ESTILOS GERAIS DE BOTÃO E INPUT (Para o Painel e Páginas) --- */
-button {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-/* RESPONSIVIDADE BASE */
-@media (max-width: 768px) {
-    .rodape-conteudo {
-        flex-direction: column;
-        text-align: center;
-    }
+.logo-parana-integral {
+    max-width: 200px;
+    margin-left: auto;
 }

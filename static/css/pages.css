@@ -1,135 +1,121 @@
-/* ARQUIVO: radiomaffei/static/css/pages.css (Layouts de Conteúdo) */
+/* ARQUIVO: radiomaffei/static/css/pages.css (ESTILOS PARA PÁGINAS SECUNDÁRIAS E PROGRAMAÇÃO) */
 
-.container-main {
-    padding: 20px;
+/* --- LAYOUTS DE CONTEÚDO (APLICADO A PROGRAMAÇÃO, SOBRE, ETC.) --- */
+
+.programa-content,
+.sobre-nos-container,
+.equipe-container,
+.galeria-container {
+    padding: 40px 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    border-radius: 10px;
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin-top: 40px;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5em;
 }
 
-.sub-texto {
-    font-size: 1.1rem;
-    margin-bottom: 40px;
-    opacity: 0.8;
-}
-
-/* --- SEÇÃO SOBRE NÓS (bloco-info) --- */
-.bloco-info {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 40px;
-    background-color: var(--roxo-card);
-    padding: 25px;
-    border-radius: 10px;
-}
-
-.bloco-info.reverso {
-    flex-direction: row-reverse;
-}
-
-.imagem-coluna {
-    flex: 1;
-    min-width: 250px;
-}
-
-.texto-coluna {
-    flex: 1.5;
-}
-
-.imagem-coluna img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-}
-
-/* --- SEÇÃO EQUIPE (Galeria de Fotos) --- */
-.equipe-galeria {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
+h2 {
+    color: var(--cor-destaque);
     margin-top: 30px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--cor-destaque);
+    padding-left: 10px;
 }
 
-.membro-card {
+
+/* --- CORREÇÃO DA TABELA DE PROGRAMAÇÃO --- */
+
+.programacao-tabs-container {
     background-color: var(--roxo-card);
     border-radius: 10px;
     padding: 20px;
-    width: 200px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.membro-foto-wrapper {
-    width: 160px;
-    height: 160px;
-    overflow: hidden;
-    border-radius: 50%;
-    /* Foto redonda */
-    margin: 0 auto 15px auto;
-    border: 3px solid var(--roxo-claro);
-}
-
-.membro-foto-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.membro-nome {
-    font-size: 1.2em;
-    color: var(--cor-destaque);
-}
-
-/* --- SEÇÃO PROGRAMAÇÃO (Estilo de Tabela) --- */
-.tabela-programacao {
-    background-color: var(--roxo-card);
-    border-radius: 15px;
-    padding: 25px;
-    margin: 30px auto;
-    max-width: 900px;
-    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    margin-top: 20px;
 }
 
 .tabs-header {
     display: flex;
     overflow-x: auto;
+    /* Permite rolar em mobile */
     border-bottom: 2px solid var(--roxo-claro);
     margin-bottom: 20px;
 }
 
-/* --- RESPONSIVIDADE (Páginas de Conteúdo) --- */
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    color: var(--cor-texto);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.tab-btn.active {
+    color: var(--cor-destaque);
+    border-bottom: 3px solid var(--cor-destaque);
+}
+
+.conteudo-dia p {
+    display: flex;
+    justify-content: space-between;
+    /* Alinha o horário à direita */
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    font-size: 1.1em;
+}
+
+.conteudo-dia span {
+    font-weight: bold;
+    color: var(--color-primary);
+    /* Amarelo */
+}
+
+
+/* --- ESTILOS DE GALERIA E IMAGENS (EQUIPE, MÍDIAS) --- */
+
+.equipe-galeria,
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.membro-card,
+.galeria-item {
+    background-color: var(--roxo-fundo);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.membro-foto-wrapper img,
+.galeria-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Responsividade de Alinhamento para Conteúdo */
 @media (max-width: 768px) {
 
     .bloco-info,
+    .rodape-conteudo {
+        flex-direction: column;
+        gap: 20px;
+    }
+
     .bloco-info.reverso {
         flex-direction: column;
-        /* Pilha em telas menores */
-        text-align: center;
-    }
-
-    .texto-coluna {
-        padding-right: 0;
-        margin-top: 20px;
-        flex: auto;
-    }
-
-    .equipe-galeria {
-        gap: 15px;
-    }
-
-    .membro-card {
-        width: 45%;
-        max-width: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .membro-card {
-        width: 90%;
-        /* Uma coluna em celulares */
+        /* Desativa a reversão em mobile */
     }
 }
