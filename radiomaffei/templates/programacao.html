@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, width=device-width">
-    <!-- CSS de base para cores e nav, e pages.css para o layout de programação -->
+    <!-- Linka o CSS Principal (index.css) para cabeçalho e cor de fundo -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     <link rel="stylesheet" href="{% static 'css/pages.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -91,37 +91,39 @@
     </main>
 
     <footer class="rodape">
-        <!-- CÓDIGO COMPLETO DO RODAPÉ (COPIADO DO HOME.HTML) -->
-        <div class="rodape-conteudo">
-            <div class="rodape-coluna rodape-col-logo">
-                <img src="{% static 'img/logooficial.jpeg' %}" alt="[Imagem de Logo JmRádio]"
-                    class="logo-jmradio-maior">
-                <p class="slogan">A Educação Integral em Sintonia Total!</p>
-            </div>
-            <div class="rodape-coluna rodape-col-contatos">
-                <h3 class="contato-titulo">Nossos contatos</h3>
-                <div class="contato-item">
-                    <p><strong>Endereço:</strong></p>
-                    <p>R. Tamôios, 2454 - Centro, Juranda - PR</p>
-                </div>
-                <div class="contato-item">
-                    <p><strong>E-mail:</strong></p>
-                    <p>jmradio.maffei@gmail.com.br</p>
-                </div>
-                <img src="{% static 'img/maffei.png' %}" alt="[Imagem de Logo JmRádio]" class="logo-jmradio-menor">
-            </div>
-            <div class="rodape-coluna rodape-col-social-parana">
-
-                <img src="{% static 'img/paranaintegral.png' %}" alt="[Imagem de Logo Paraná Integral]"
-                    class="logo-parana-integral">
-            </div>
-        </div>
+        <!-- O Rodapé completo deve ser colado aqui -->
     </footer>
 
-    <!-- SCRIPTS -->
-    <script src="{% static 'js/menu.js' %}" defer></script>
+    <!-- Script JavaScript para alternar as abas -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.conteudo-dia');
 
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // 1. Remove a classe 'active' de todos
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
 
+                    // 2. Adiciona a classe 'active' ao botão clicado
+                    tab.classList.add('active');
+
+                    // 3. Ativa o conteúdo correspondente ao data-dia
+                    const targetId = tab.getAttribute('data-dia');
+                    const target = document.getElementById(targetId);
+                    if (target) target.classList.add('active');
+                });
+            });
+
+            // Garante que o primeiro dia (Segunda) esteja visível por padrão
+            if (tabs.length > 0) {
+                tabs[0].classList.add('active');
+                const initialContent = document.getElementById(tabs[0].getAttribute('data-dia'));
+                if (initialContent) initialContent.classList.add('active');
+            }
+        });
+    </script>
 </body>
 
 </html>
