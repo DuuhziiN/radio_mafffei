@@ -1,67 +1,59 @@
-{% extends "base_nav.html" %}
 {% load static %}
 
-{% block title %}JM RÁDIO - Início{% endblock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<title>JM RÁDIO</title>
 
-{% block content %}
 
-<!-- SEÇÃO SLIDESHOW -->
 
-<div class="slideshow-container">
-    <div class="mySlides fade">
-        <img src="{% static 'img/radioequipe.jpeg' %}" style="width:100%">
+<main>
+    <!-- SEÇÃO SLIDESHOW (Corrigidas as URLs de imagem) -->
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="{% static 'img/radioequipe.jpeg' %}" style="width:100%">
+        </div>
+        <div class="mySlides fade">
+            <img src="{% static 'img/radioequipe2.jpeg' %}" style="width:100%">
+        </div>
     </div>
-    <div class="mySlides fade">
-        <img src="{% static 'img/radioequipe2.jpeg' %}" style="width:100%">
-    </div>
-</div>
+    <br>
 
+    <div class="radio-player-container">
+        <div class="player-content">
 
+            <!-- CONTROLES ESTILIZADOS -->
+            <a href="{% url 'radiomaffei:programacao' %}" class="player-button btn-abrir-player">VER PROGRAMAÇÃO</a>
+            <button id="play-pause-btn" class="player-button btn-play-pause">
+                <i class="fa-solid fa-play"></i>
+            </button>
+            <a href="{% url 'radiomaffei:radialista' %}" class="player-button btn-programacao">PAINEL RADIALISTA</a>
 
-
-<div class="radio-player-container">
-    <div class="player-content">
-
-        <!-- CONTROLES ESTILIZADOS (Integração com o radio.js) -->
-        <a href="#" class="player-button btn-abrir-player">ABRIR PLAYER</a>
-        <button id="play-pause-btn" class="player-button btn-play-pause">
-            <i class="fa-solid fa-play"></i>
-        </button>
-        <a href="{% url 'radiomaffei:programacao' %}" class="player-button btn-programacao">VER PROGRAMAÇÃO</a>
-
-        <!-- PLAYER DE STREAMING AO VIVO (USADO PELO CHANNELS) -->
-        <div id="live-controls" style="display:none;">
-            <audio id="audio-player" preload="auto"></audio>
-            <p id="status-message" style="display:none;"></p>
+            <!-- PLAYER DE STREAMING AO VIVO (USADO PELO CHANNELS) -->
+            <div id="live-controls" style="display:none;">
+                <audio id="audio-player" preload="auto"></audio>
+                <p id="status-message" style="display:none;"></p>
+            </div>
         </div>
     </div>
 
-
-</div>
-
-<!-- PLAYLIST DE MÚSICAS GRAVADAS -->
-
-<div class="playlist-section">
-    <h2>Músicas na Playlist</h2>
-    {% for musica in musicas %}
-    <div class="musica-item">
-        <p>{{ musica.titulo }}</p>
-        <audio controls>
-            <source src="{{ musica.arquivo.url }}" type="audio/mpeg">
-        </audio>
+    <!-- PLAYLIST DE MÚSICAS GRAVADAS -->
+    <div class="playlist-section">
+        <h2>Músicas na Playlist</h2>
+        {% for musica in musicas %}
+        <div class="musica-item">
+            <p>{{ musica.titulo }}</p>
+            <audio controls>
+                <source src="{{ musica.arquivo.url }}" type="audio/mpeg">
+            </audio>
+        </div>
+        {% empty %}
+        <p>Nenhuma música gravada.</p>
+        {% endfor %}
     </div>
-    {% empty %}
-    <p>Nenhuma música gravada.</p>
-    {% endfor %}
-</div>
 
-<!-- SEÇÃO DE VÍDEOS -->
-
-<section class="video-section">
-    <div class="video-header">
-        <h1>Explore nossos vídeos e mergulhe no entretenimento</h1>
-    </div>
-    <div class="video-gallery">
+    <!-- SEÇÃO DE VÍDEOS (Corrigidas as URLs de mídia) -->
+    <section class="video-section">
         <div class="video-card">
             <a href="#">
                 <div class="video-thumbnail-wrapper">
@@ -70,7 +62,6 @@
                 <p class="video-title">De Estudantes para Estudantes: A JM Rádio FM Chegou!</p>
             </a>
         </div>
-        <!-- Cards de vídeo adicionais (aqui você repetiria o bloco) -->
         <div class="video-card">
             <a href="#">
                 <div class="video-thumbnail-wrapper">
@@ -80,14 +71,41 @@
                 <p class="video-title">Competição de Foguetes!</p>
             </a>
         </div>
+    </section>
+
+</main>
+
+<footer class="rodape">
+    <div class="rodape-conteudo">
+        <div class="rodape-coluna rodape-col-logo">
+            <img src="{% static 'img/logooficial.jpeg' %}" alt="Logo JmRádio" class="logo-jmradio-maior">
+            <p class="slogan">A Educação Integral em Sintonia Total!</p>
+        </div>
+        <div class="rodape-coluna rodape-col-contatos">
+            <h3 class="contato-titulo">Nossos contatos</h3>
+            <div class="contato-item">
+                <p><strong>Endereço:</strong></p>
+                <p>R. Tamôios, 2454 - Centro, Juranda - PR</p>
+            </div>
+            <div class="contato-item">
+                <p><strong>E-mail:</strong></p>
+                <p>jmradio.maffei@gmail.com.br</p>
+            </div>
+            <img src="{% static 'img/maffei.png' %}" alt="Logo JmRádio" class="logo-jmradio-menor">
+        </div>
+        <div class="rodape-coluna rodape-col-social-parana">
+            <h3 class="redes-titulo">REDES SOCIAIS</h3>
+            <div class="social-icons-rodape">
+                <a href="URL_FACEBOOK" class="icon-social-rodape facebook-rodape" aria-label="Facebook"></a>
+                <a href="URL_INSTAGRAM" class="icon-social-rodape instagram-rodape" aria-label="Instagram"></a>
+                <a href="URL_YOUTUBE" class="icon-social-rodape youtube-rodape" aria-label="YouTube"></a>
+            </div>
+            <img src="{% static 'img/paranaintegral.png' %}" alt="Logo Paraná Integral" class="logo-parana-integral">
+        </div>
     </div>
-</section>
-{% endblock %}
+</footer>
 
-{% block extra_js %}
-
-<!-- Adiciona o script de animação do banner (mantendo a funcionalidade) -->
-
+{% include "audio_script.html" %}
 <script src="{% static 'js/banner.js' %}"></script>
-
-{% endblock %}
+<script src="{% static 'js/menu.js' %}" defer></script>
+<script src="{% static 'js/radio.js' %}" defer></script>

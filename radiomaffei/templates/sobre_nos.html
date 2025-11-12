@@ -1,49 +1,123 @@
-{% extends "base_nav.html" %}
+{% load static %}
 
-{% block title %}Sobre Nós - JM Rádio{% endblock %}
+<!DOCTYPE html>
 
-{% block content %}
+<html>
 
-<section class="sobre-nos-container">
-    <h1>Sobre a JM Rádio FM</h1>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link rel="stylesheet"
+        href="https://www.google.com/search?q=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Sobre Nós - JM Rádio</title>
+</head>
 
-    <div class="bloco-info reverso">
-        <div class="texto-coluna">
-            <h2>Nossa História e Visão</h2>
-            <p>A JM Rádio FM nasceu da iniciativa de alunos e professores da Escola Estadual João Maffei, com o objetivo
-                de promover a educação integral, comunicação e cultura entre a comunidade escolar e local. Somos mais do
-                que uma rádio; somos um laboratório de talentos, uma voz para os estudantes e um meio de conectar a
-                escola com o mundo.</p>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="{% static 'img/logoo.png' %}" alt="Logo">
+            </div>
+            <div class="mobile-menu">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <ul class="nav-list">
+                <li><a href="{% url 'radiomaffei:sobre_nos' %}">Sobre Nós</a></li>
+                <li><a href="{% url 'radiomaffei:equipe' %}">Equipe</a></li>
+                <li><a href="{% url 'radiomaffei:midias' %}">Mídias</a></li>
+                <li><a href="{% url 'radiomaffei:concursos_programas' %}">Concursos</a></li>
+                <li><a href="{% url 'radiomaffei:programacao' %}">Programação</a></li>
+                <li><a href="{% url 'radiomaffei:radialista' %}">Painel</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="sobre-nos-container container-main">
+            <h1>Sobre a JM Rádio FM</h1>
+
+            <div class="bloco-info reverso">
+                <div class="texto-coluna">
+                    <h2>Nossa História e Visão</h2>
+                    <p>A JM Rádio FM nasceu da iniciativa de alunos e professores da Escola Estadual João Maffei, com o
+                        objetivo de promover a educação integral, comunicação e cultura entre a comunidade escolar e
+                        local. Somos mais do que uma rádio; somos um laboratório de talentos, uma voz para os estudantes
+                        e um meio de conectar a escola com o mundo.</p>
+                </div>
+                <div class="imagem-coluna">
+                    <img src="{% static 'img/radio_estudio.jpeg' %}" alt="[Imagem de Estúdio de rádio]">
+                </div>
+            </div>
+
+            <div class="bloco-info">
+                <div class="imagem-coluna">
+                    <img src="{% static 'img/radio_alunos.jpeg' %}" alt="[Imagem de Alunos trabalhando na rádio]">
+                </div>
+                <div class="texto-coluna">
+                    <h2>Nosso Compromisso com a Comunidade</h2>
+                    <p>Priorizamos conteúdos informativos, educativos e culturais. Nossa programação é feita de aluno
+                        para aluno, abrangendo todos os gêneros musicais, entrevistas, notícias locais e participação da
+                        comunidade. Acreditamos no poder da comunicação responsável e na importância de dar voz a todas
+                        as ideias.</p>
+                </div>
+            </div>
+
+            <div class="bloco-info reverso">
+                <div class="texto-coluna">
+                    <h2>Educação e Tecnologia</h2>
+                    <p>A rádio é uma ferramenta de aprendizado prático, onde os alunos desenvolvem habilidades em
+                        comunicação, produção de conteúdo, edição de áudio e tecnologia. O projeto integra o currículo
+                        escolar e promove o protagonismo juvenil, preparando os estudantes para o futuro digital.</p>
+                </div>
+                <div class="imagem-coluna">
+                    <img src="{% static 'img/radio_tecnologia.jpeg' %}" alt="[Imagem de Equipamento de transmissão]">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="rodape">
+        <div class="rodape-conteudo">
+            <div class="rodape-coluna rodape-col-logo">
+                <img src="{% static 'img/logooficial.jpeg' %}" alt="[Imagem de Logo JmRádio]"
+                    class="logo-jmradio-maior">
+                <p class="slogan">A Educação Integral em Sintonia Total!</p>
+            </div>
+            <div class="rodape-coluna rodape-col-contatos">
+                <h3 class="contato-titulo">Nossos contatos</h3>
+                <div class="contato-item">
+                    <p><strong>Endereço:</strong></p>
+                    <p>R. Tamôios, 2454 - Centro, Juranda - PR</p>
+                </div>
+                <div class="contato-item">
+                    <p><strong>E-mail:</strong></p>
+                    <p>jmradio.maffei@gmail.com.br</p>
+                </div>
+                <img src="{% static 'img/maffei.png' %}" alt="[Imagem de Logo JmRádio]" class="logo-jmradio-menor">
+            </div>
+            <div class="rodape-coluna rodape-col-social-parana">
+                <h3 class="redes-titulo">REDES SOCIAIS</h3>
+                <div class="social-icons-rodape">
+                    <a href="URL_FACEBOOK" class="icon-social-rodape facebook-rodape" aria-label="Facebook"></a>
+                    <a href="URL_INSTAGRAM" class="icon-social-rodape instagram-rodape" aria-label="Instagram"></a>
+                    <a href="URL_YOUTUBE" class="icon-social-rodape youtube-rodape" aria-label="YouTube"></a>
+                </div>
+                <img src="{% static 'img/paranaintegral.png' %}" alt="[Imagem de Logo Paraná Integral]"
+                    class="logo-parana-integral">
+            </div>
         </div>
-        <div class="imagem-coluna">
-            <img src="{% static 'img/radio_estudio.jpeg' %}" alt="Estúdio de rádio">
-        </div>
-    </div>
+    </footer>
 
-    <div class="bloco-info">
-        <div class="imagem-coluna">
-            <img src="{% static 'img/radio_alunos.jpeg' %}" alt="Alunos trabalhando na rádio">
-        </div>
-        <div class="texto-coluna">
-            <h2>Nosso Compromisso com a Comunidade</h2>
-            <p>Priorizamos conteúdos informativos, educativos e culturais. Nossa programação é feita de aluno para
-                aluno, abrangendo todos os gêneros musicais, entrevistas, notícias locais e participação da comunidade.
-                Acreditamos no poder da comunicação responsável e na importância de dar voz a todas as ideias.</p>
-        </div>
-    </div>
-
-    <div class="bloco-info reverso">
-        <div class="texto-coluna">
-            <h2>Educação e Tecnologia</h2>
-            <p>A rádio é uma ferramenta de aprendizado prático, onde os alunos desenvolvem habilidades em comunicação,
-                produção de conteúdo, edição de áudio e tecnologia. O projeto integra o currículo escolar e promove o
-                protagonismo juvenil, preparando os estudantes para o futuro digital.</p>
-        </div>
-        <div class="imagem-coluna">
-            <img src="{% static 'img/radio_tecnologia.jpeg' %}" alt="Equipamento de transmissão">
-        </div>
-    </div>
+    <!-- SCRIPTS -->
+    <script src="{% static 'js/menu.js' %}" defer></script>
 
 
-</section>
-{% endblock %}
+</body>
+
+</html>

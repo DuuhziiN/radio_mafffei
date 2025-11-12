@@ -5,8 +5,6 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
-from django.views.static import serve as static_serve
-from django.urls import re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,17 +13,11 @@ urlpatterns = [
 ]
 
 # ==========================================================
-# SOLUÇÃO FINAL DE URL PARA AMBIENTE DE PRODUÇÃO/DEV
-# O Render precisa desta lógica unificada
+# SOLUÇÃO FINAL DE URL PARA AMBIENTE DE DESENVOLVIMENTO (DEBUG=True)
 # ==========================================================
 if settings.DEBUG:
+    # 1. Mapeamento para MÍDIA
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+    # 2. Mapeamento ESTÁTICO: Força o servidor a buscar nos diretórios dos APPs
     urlpatterns += staticfiles_urlpatterns()
-
-# 2. MAPEAMENTO CRÍTICO PARA MÍDIA (FORA DO BLOCO DEBUG PARA PRODUÇÃO)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-urlpatterns += [
-    re_path(r'^media/(?P<path>.*)$', static_serve, {
-        'document_root': settings.MEDIA_ROOT,
-    }),
-]
