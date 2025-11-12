@@ -1,511 +1,219 @@
-/* ------------------------------------- */
-/* ESTILOS GERAIS E LAYOUT */
-/* ------------------------------------- */
-body {
+/* ARQUIVO: radiomaffei/static/css/index.css (ESTILOS CONSOLIDADOS E CORRIGIDOS) */
+
+/* --- VARIÁVEIS E BASE GERAL --- */
+:root {
+    --roxo-fundo: #470154;
+    --roxo-card: #600474;
+    --roxo-claro: #9406b4;
+    --cor-texto: white;
+    --cor-destaque: #fa0daf;
+    /* Pink Neon */
+    --color-primary: #fcd513;
+    /* Amarelo (Destaque) */
+    --preto-escuro: #1a0022;
+    /* Para inputs e backgrounds internos */
+    --verde-principal: #33a330;
+    /* Botões de Ação */
+    --vermelho-principal: #cc3333;
+    /* Botões de Deletar */
+}
+
+* {
     margin: 0;
-    line-height: 1.5;
-    color: #333;
-    font-family: 'Arial', sans-serif;
-    /* Fonte padrão */
-    background-color: #f5f5f5;
-    /* Fundo claro para o corpo */
-    min-height: 100vh;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+}
+
+/* FUNDO E LAYOUT PRINCIPAL */
+body {
+    background: linear-gradient(180deg, #40024e, #470356 0.01%, #600474 33.65%, var(--roxo-claro) 38.46%, #b013b7 58.65%, #c41dba 71.88%, var(--cor-destaque) 85.05%, #fb1ab4 90.23%, #ff39c0 97.12%);
+    background-attachment: fixed;
+    color: var(--cor-texto);
+    background-size: cover;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 main {
     flex-grow: 1;
-    padding-top: 70px;
-    /* Espaço para o cabeçalho fixo */
+    padding-top: 8vh;
+    /* Espaço para o cabeçalho nav fixo */
 }
 
-.container-main {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+a {
+    color: var(--cor-texto);
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-/* Títulos */
-h1 {
-    font-size: 2.2em;
-    color: #007bff;
-    /* Cor primária */
-    text-align: center;
-    margin-bottom: 20px;
+a:hover {
+    opacity: 0.8;
+    color: var(--cor-destaque);
 }
 
-.sub-texto {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 1.1em;
-    color: #666;
-}
+/* --- ESTILOS DE NAVEGAÇÃO E CABEÇALHO --- */
 
-/* ------------------------------------- */
-/* NAVEGAÇÃO (HEADER) */
-/* ------------------------------------- */
-header {
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #350a3f;
+    height: 8vh;
     position: fixed;
+    /* MANTEM A NAV NO TOPO */
     width: 100%;
     top: 0;
     z-index: 1000;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
 .logo-container img {
-    height: 50px;
+    height: 40px;
 }
 
 .nav-list {
     list-style: none;
     display: flex;
     margin: 0;
-    padding: 0;
 }
 
 .nav-list li {
-    margin-left: 20px;
+    margin-left: 32px;
 }
 
-.nav-list a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    padding: 5px 10px;
-    transition: color 0.3s ease;
-}
 
-.nav-list a:hover {
-    color: #007bff;
-}
+/* --- ESTILOS DE COMPONENTES DE CONTEÚDO GERAL --- */
 
-/* Mobile Menu (Hamburger) */
-.mobile-menu {
-    cursor: pointer;
-    display: none;
-}
-
-.mobile-menu div {
-    width: 32px;
-    height: 2px;
-    background: #333;
-    margin: 8px;
-    transition: 0.3s;
-}
-
-@media (max-width: 768px) {
-    .nav-list {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 60%;
-        height: 90vh;
-        background: #ffffff;
-        flex-direction: column;
-        align-items: center;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in;
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-        padding-top: 30px;
-    }
-
-    .nav-list li {
-        margin: 20px 0;
-        opacity: 0;
-    }
-
-    .mobile-menu {
-        display: block;
-    }
-
-    .nav-list.active {
-        transform: translateX(0);
-    }
-}
-
-/* ------------------------------------- */
-/* HOME PAGE COMPONENTS */
-/* ------------------------------------- */
-
-/* SLIDESHOW (Carousel) */
-.slideshow-container {
-    max-width: 100%;
-    position: relative;
-    margin: auto;
-    overflow: hidden;
-}
-
-.mySlides {
-    display: none;
-    width: 100%;
-}
-
-.mySlides img {
-    width: 100%;
-    height: 400px;
-    /* Altura fixa para as imagens do banner */
-    object-fit: cover;
-}
-
-.fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@keyframes fade {
-    from {
-        opacity: .4
-    }
-
-    to {
-        opacity: 1
-    }
-}
-
-/* PLAYER DE RÁDIO */
-.radio-player-container {
-    text-align: center;
-    padding: 30px 20px;
-    background-color: #e9ecef;
-    border-top: 5px solid #007bff;
-    margin-bottom: 20px;
-}
-
-.player-content {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.player-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-}
-
-.player-button:hover {
-    background-color: #0056b3;
-}
-
-.btn-play-pause i {
-    font-size: 1.2em;
-}
-
-/* SEÇÃO DE PLAYLIST (Músicas gravadas) */
-.playlist-section {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-.playlist-section h2 {
-    text-align: center;
-    color: #007bff;
-    margin-bottom: 25px;
-}
-
-.musica-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.musica-item:last-child {
-    border-bottom: none;
-}
-
-/* CORREÇÃO PARA VÍDEOS (Issue 3: Vídeos não rodam/layout) */
+.container-main,
+.playlist-section,
 .video-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
     padding: 20px;
-}
-
-.video-card {
-    flex: 0 0 calc(50% - 10px);
-    /* Dois por linha em telas maiores */
-    max-width: 350px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.3s;
-}
-
-.video-card:hover {
-    transform: translateY(-5px);
-}
-
-.video-thumbnail-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
     width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
-    /* Relação de aspecto 16:9 */
-    position: relative;
-    overflow: hidden;
 }
 
-.video-thumbnail {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.sub-texto {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    opacity: 0.8;
 }
 
-.video-title {
-    padding: 15px;
-    font-weight: bold;
-    color: #333;
-    font-size: 1em;
-}
 
-@media (max-width: 768px) {
-    .video-card {
-        flex: 0 0 100%;
-        /* Um por linha em mobile */
-        max-width: 100%;
-    }
-}
+/* --- SEÇÕES (SOBRE NÓS, PROGRAMAÇÃO) --- */
 
-/* ------------------------------------- */
-/* SOBRE NÓS PAGE */
-/* ------------------------------------- */
 .bloco-info {
     display: flex;
     align-items: center;
-    margin-bottom: 50px;
     gap: 40px;
-    background-color: #fff;
-    padding: 30px;
+    margin-bottom: 60px;
+    text-align: left;
+    background-color: var(--roxo-card);
+    /* Fundo dos cards de informação */
+    padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .bloco-info.reverso {
     flex-direction: row-reverse;
 }
 
-.bloco-info .texto-coluna {
-    flex: 1;
-}
-
-.bloco-info .imagem-coluna {
-    flex: 1;
-    min-width: 250px;
-}
-
-.bloco-info .imagem-coluna img {
+.imagem-coluna img {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-@media (max-width: 900px) {
-
-    .bloco-info,
-    .bloco-info.reverso {
-        flex-direction: column;
-    }
-
-    .bloco-info .imagem-coluna {
-        margin-top: 20px;
-    }
-}
-
-/* ------------------------------------- */
-/* PROGRAMAÇÃO PAGE */
-/* ------------------------------------- */
-.programa-content {
-    background-color: #fff;
-    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    height: auto;
+    object-fit: cover;
 }
 
-.tabela-programacao h2 {
-    text-align: center;
-    color: #0056b3;
-    margin-bottom: 20px;
-}
+/* --- ESTILO DOS PLAYERS E BOTÕES DE AÇÃO --- */
 
-.programacao-tabs-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.tabs-header {
+.radio-player-container {
     display: flex;
-    justify-content: space-around;
-    border-bottom: 2px solid #ddd;
-    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 20px auto;
+    background-color: var(--roxo-card);
+    border: 5px solid var(--cor-destaque);
+    border-radius: 82px;
+    box-sizing: border-box;
+    height: 120px;
 }
 
-.tab-btn {
-    flex-grow: 1;
-    padding: 15px 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    color: #666;
-    transition: color 0.3s, border-bottom 0.3s;
+.player-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.tab-btn.active {
-    color: #007bff;
-    border-bottom: 3px solid #007bff;
+.btn-play-pause {
+    /* BOTÃO ESTILIZADO DE STREAMING */
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    border-radius: 50%;
+    background-color: var(--roxo-fundo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: var(--cor-destaque);
+    /* Pink Neon */
+    margin: 0 20px;
+    outline: none;
+    box-shadow: 0 0 15px var(--cor-destaque);
 }
 
-.conteudo-dia {
-    display: none;
-    padding: 20px;
-    background-color: #f9f9f9;
+.btn-abrir-player {
+    background-color: var(--color-primary);
+    /* Amarelo */
+    border: 6px solid var(--roxo-fundo);
+    border-radius: 37px;
+    color: var(--roxo-fundo);
+    font-weight: 700;
+}
+
+.btn-programacao {
+    background-color: var(--color-secondary);
+    border: 6px solid var(--roxo-fundo);
+    border-radius: 37px;
+    color: var(--roxo-fundo);
+    font-weight: 700;
+}
+
+/* --- PLAYLIST --- */
+.playlist-section {
+    background-color: transparent;
+}
+
+.musica-item {
+    background-color: var(--roxo-card);
+    padding: 10px 15px;
+    margin-bottom: 10px;
     border-radius: 8px;
-}
-
-.conteudo-dia.active {
-    display: block;
-}
-
-.conteudo-dia p {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px dotted #ccc;
-    font-size: 1.05em;
+    align-items: center;
 }
 
-.conteudo-dia p span {
-    font-weight: bold;
-    color: #007bff;
+.musica-item audio {
+    width: 60%;
+    filter: invert(1);
+    /* Deixa o player preto/branco para contraste */
 }
 
-.slogan-grande {
-    color: #333;
-    font-size: 1.5em;
-    margin-top: 40px;
-    font-style: italic;
-}
 
-/* ------------------------------------- */
-/* EQUIPE PAGE (Issue 1: Fotos da Equipe) */
-/* ------------------------------------- */
-.equipe-galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 30px;
-    padding: 20px 0;
-    justify-items: center;
-}
-
-.membro-card {
-    text-align: center;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    transition: transform 0.3s ease;
-    max-width: 200px;
-    /* Limita o tamanho do card */
-}
-
-.membro-card:hover {
-    transform: translateY(-5px);
-}
-
-.membro-foto-wrapper {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 10px;
-    overflow: hidden;
-    border-radius: 50%;
-    border: 3px solid #007bff;
-    /* Cor primária */
-}
-
-.membro-foto-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Garante que a imagem preencha o círculo */
-}
-
-.membro-nome {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #333;
-    margin: 5px 0;
-}
-
-.membro-funcao {
-    font-size: 0.9em;
-    color: #666;
-}
-
-/* ------------------------------------- */
-/* MÍDIAS PAGE */
-/* ------------------------------------- */
-.galeria-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
-}
-
-.galeria-item {
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.galeria-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s;
-}
-
-.galeria-item img:hover {
-    transform: scale(1.05);
-}
-
-/* ------------------------------------- */
-/* RODAPÉ (FOOTER) (Issue 2: Rodapé desproporcional) */
-/* ------------------------------------- */
+/* --- RODAPÉ --- */
 .rodape {
-    background-color: #333;
+    background-color: black;
     color: white;
-    padding: 30px 20px;
+    padding: 30px 20px 10px;
+    line-height: 1.5;
     margin-top: 40px;
 }
 
@@ -515,75 +223,81 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
     flex-wrap: wrap;
-    gap: 30px;
 }
 
 .rodape-coluna {
+    padding: 15px;
     flex: 1;
     min-width: 250px;
 }
 
-/* Estilo dos Logos no Rodapé (CORREÇÃO DE TAMANHO) */
-.logo-jmradio-maior {
-    width: 150px;
+/* CORREÇÃO CRÍTICA DO RODAPÉ */
+.logo-jmradio-maior,
+.logo-jmradio-menor,
+.logo-parana-integral {
+    max-width: 100px;
+    /* Limita o tamanho das imagens */
     height: auto;
-    margin-bottom: 10px;
-}
-
-.logo-jmradio-menor {
-    width: 80px;
-    height: auto;
-    margin-top: 20px;
+    display: block;
 }
 
 .logo-parana-integral {
-    width: 100px;
-    height: auto;
-    margin-top: 20px;
+    max-width: 150px;
+    margin-left: auto;
 }
 
-.slogan {
-    font-style: italic;
-    font-size: 0.9em;
-    opacity: 0.8;
+/* --- ESTILOS DO PAINEL DO RADIALISTA (APLICA-SE COM OVERRIDE) --- */
+.header-painel {
+    background-color: var(--roxo-fundo);
 }
 
-.contato-titulo,
-.redes-titulo {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-    color: #007bff;
+.container-painel {
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 20px auto;
 }
 
-.contato-item p {
-    margin: 5px 0;
+.card {
+    background-color: var(--roxo-card);
+    border-radius: 15px;
+    padding: 25px;
+    flex: 1;
 }
 
-.social-icons-rodape a {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background-color: #fff;
-    /* Placeholder para ícones sociais */
-    border-radius: 50%;
-    margin-right: 10px;
-    /* Adicione aqui ícones reais ou cores */
+.btn-deletar {
+    background-color: var(--vermelho-principal);
+    padding: 5px 10px;
+    font-size: 0.8em;
 }
+
+
+/* --- RESPONSIVIDADE --- */
 
 @media (max-width: 768px) {
+    .nav-list {
+        /* Lógica de menu mobile */
+        transform: translateX(100%);
+    }
+
+    .container-painel {
+        flex-direction: column;
+    }
+
+    .radio-player-container {
+        flex-direction: column;
+        height: auto;
+        border-radius: 30px;
+    }
+
     .rodape-conteudo {
         flex-direction: column;
         text-align: center;
     }
 
     .rodape-coluna {
+        min-width: 100%;
         margin-bottom: 20px;
-    }
-
-    .logo-jmradio-maior,
-    .logo-jmradio-menor,
-    .logo-parana-integral {
-        margin-left: auto;
-        margin-right: auto;
     }
 }
