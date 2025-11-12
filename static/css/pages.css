@@ -40,10 +40,6 @@ h2 {
 .tabs-header {
     display: flex;
     overflow-x: auto;
-    white-space: nowrap;
-    /* Impede quebras dentro dos botões */
-    -webkit-overflow-scrolling: touch;
-    /* Suaviza o scroll em iOS */
     border-bottom: 2px solid var(--roxo-claro);
     margin-bottom: 20px;
 }
@@ -93,8 +89,8 @@ h2 {
 .equipe-galeria,
 .galeria-grid {
     display: grid;
-    /* CRÍTICO: Garante que haja apenas 1 coluna em mobile e 2 em telas maiores */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Ajustado para 2 colunas em telas menores e 3+ em desktop */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     margin-top: 20px;
 }
@@ -105,17 +101,15 @@ h2 {
     border-radius: 10px;
     padding: 15px;
     text-align: center;
-    max-width: 100%;
 }
 
 .membro-foto-wrapper {
     width: 100%;
-    height: 250px;
+    height: 200px;
     /* Altura fixa para alinhar as fotos */
     overflow: hidden;
     border-radius: 8px;
     margin-bottom: 10px;
-    height: 250px;
 }
 
 .membro-foto-wrapper img,
@@ -129,19 +123,7 @@ h2 {
 
 .bloco-info {
     display: flex;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 60px;
-    background-color: var(--roxo-card);
-    padding: 25px;
-    border-radius: 10px;
-}
-
-
-.bloco-info {
-    display: flex;
     align-items: flex-start;
-    /* Alinha o conteúdo ao topo (ajuda a evitar quebra) */
     gap: 40px;
     margin-bottom: 60px;
     background-color: var(--roxo-card);
@@ -149,32 +131,7 @@ h2 {
     border-radius: 10px;
 }
 
-.texto-coluna {
-    flex: 1;
-    /* Garante que a coluna de texto ocupe 50% */
-}
-
-.imagem-coluna {
-    flex: 1;
-    /* Garante que a coluna de imagem ocupe 50% */
-    max-width: 50%;
-    /* Limite para garantir que a coluna não estique demais */
-}
-
-/* Reverte a ordem de imagem/texto */
-.bloco-info.reverso {
-    flex-direction: row-reverse;
-}
-
-/* Garantir que as imagens fiquem dentro do container (CRÍTICO) */
-.bloco-info img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-/* Responsividade: Voltar para coluna única em telas pequenas */
+/* Responsividade de Alinhamento para Conteúdo */
 @media (max-width: 768px) {
     .bloco-info {
         flex-direction: column;
@@ -188,5 +145,11 @@ h2 {
     .imagem-coluna {
         max-width: 100%;
         /* Permite que a imagem ocupe a largura total */
+    }
+
+    .equipe-galeria,
+    .galeria-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        /* 2-3 colunas pequenas */
     }
 }
