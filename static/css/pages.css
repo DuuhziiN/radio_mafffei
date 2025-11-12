@@ -1,5 +1,6 @@
 /* ARQUIVO: radiomaffei/static/css/pages.css (CORREÇÃO DA PROGRAMAÇÃO E LAYOUTS SECUNDÁRIOS) */
 
+/* Layouts Gerais de Conteúdo */
 .programa-content,
 .sobre-nos-container,
 .equipe-container,
@@ -26,7 +27,7 @@ h2 {
 }
 
 
-/* --- CORREÇÃO DA TABELA DE PROGRAMAÇÃO (ABA) --- */
+/* --- CORREÇÃO CRÍTICA DA PROGRAMAÇÃO (ABA / TABELA) --- */
 
 .programacao-tabs-container {
     background-color: var(--roxo-card);
@@ -59,18 +60,29 @@ h2 {
     border-bottom: 3px solid var(--cor-destaque);
 }
 
+.conteudo-dia {
+    /* Exibe apenas o dia ativo */
+    display: none;
+}
+
+.conteudo-dia.active {
+    display: block;
+}
+
 .conteudo-dia p {
     display: flex;
     justify-content: space-between;
     /* CRÍTICO: Alinha o horário à direita */
-    padding: 10px 0;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
     font-size: 1.1em;
 }
 
 .conteudo-dia span {
     font-weight: bold;
     color: var(--color-primary);
+    /* Garante que o horário não quebre a linha em mobile */
+    white-space: nowrap;
 }
 
 
