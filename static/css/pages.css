@@ -1,0 +1,135 @@
+/* ARQUIVO: radiomaffei/static/css/pages.css (Layouts de Conteúdo) */
+
+.container-main {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-top: 40px;
+}
+
+.sub-texto {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+/* --- SEÇÃO SOBRE NÓS (bloco-info) --- */
+.bloco-info {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    background-color: var(--roxo-card);
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.bloco-info.reverso {
+    flex-direction: row-reverse;
+}
+
+.imagem-coluna {
+    flex: 1;
+    min-width: 250px;
+}
+
+.texto-coluna {
+    flex: 1.5;
+}
+
+.imagem-coluna img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* --- SEÇÃO EQUIPE (Galeria de Fotos) --- */
+.equipe-galeria {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.membro-card {
+    background-color: var(--roxo-card);
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.membro-foto-wrapper {
+    width: 160px;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 50%;
+    /* Foto redonda */
+    margin: 0 auto 15px auto;
+    border: 3px solid var(--roxo-claro);
+}
+
+.membro-foto-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.membro-nome {
+    font-size: 1.2em;
+    color: var(--cor-destaque);
+}
+
+/* --- SEÇÃO PROGRAMAÇÃO (Estilo de Tabela) --- */
+.tabela-programacao {
+    background-color: var(--roxo-card);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px auto;
+    max-width: 900px;
+    text-align: left;
+}
+
+.tabs-header {
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 2px solid var(--roxo-claro);
+    margin-bottom: 20px;
+}
+
+/* --- RESPONSIVIDADE (Páginas de Conteúdo) --- */
+@media (max-width: 768px) {
+
+    .bloco-info,
+    .bloco-info.reverso {
+        flex-direction: column;
+        /* Pilha em telas menores */
+        text-align: center;
+    }
+
+    .texto-coluna {
+        padding-right: 0;
+        margin-top: 20px;
+        flex: auto;
+    }
+
+    .equipe-galeria {
+        gap: 15px;
+    }
+
+    .membro-card {
+        width: 45%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .membro-card {
+        width: 90%;
+        /* Uma coluna em celulares */
+    }
+}

@@ -1,0 +1,114 @@
+/* ARQUIVO: radiomaffei/static/css/base.css (BASE PARA TODAS AS PÁGINAS) */
+
+:root {
+    --roxo-fundo: #470154;
+    --roxo-card: #600474;
+    --roxo-claro: #9406b4;
+    --cor-texto: white;
+    --cor-destaque: #fa0daf;
+    /* Pink Neon */
+    --color-primary: #fcd513;
+    /* Amarelo (Destaque) */
+    --color-secondary: #d9d9d9;
+    --preto-escuro: #1a0022;
+    --verde-principal: #33a330;
+    /* Botões de Ação */
+    --vermelho-principal: #cc3333;
+    /* Botões de Deletar */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+}
+
+/* FUNDO E LAYOUT PRINCIPAL */
+body {
+    /* Gradiente roxo/pink vibrante */
+    background: linear-gradient(180deg, #40024e, #470356 0.01%, #600474 33.65%, var(--roxo-claro) 38.46%, #b013b7 58.65%, #c41dba 71.88%, var(--cor-destaque) 85.05%, #fb1ab4 90.23%, #ff39c0 97.12%);
+    background-attachment: fixed;
+    color: var(--cor-texto);
+    background-size: cover;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+    padding-top: 8vh;
+    /* Espaço para o cabeçalho nav fixo */
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+a {
+    color: var(--cor-texto);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover {
+    opacity: 0.8;
+    color: var(--cor-destaque);
+}
+
+h1,
+h2 {
+    color: var(--cor-destaque);
+    margin: 15px 0;
+}
+
+/* --- ESTILOS DO RODAPÉ (Geral) --- */
+.rodape {
+    background-color: black;
+    color: white;
+    padding: 30px 20px 10px;
+    line-height: 1.5;
+    margin-top: 40px;
+}
+
+.rodape-conteudo {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.rodape-coluna {
+    padding: 15px;
+    flex: 1;
+    min-width: 250px;
+}
+
+.logo-parana-integral,
+.logo-jmradio-maior,
+.logo-jmradio-menor {
+    max-width: 150px;
+    height: auto;
+    display: block;
+}
+
+/* --- ESTILOS GERAIS DE BOTÃO E INPUT (Para o Painel e Páginas) --- */
+button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+/* RESPONSIVIDADE BASE */
+@media (max-width: 768px) {
+    .rodape-conteudo {
+        flex-direction: column;
+        text-align: center;
+    }
+}

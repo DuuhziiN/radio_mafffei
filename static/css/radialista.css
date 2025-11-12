@@ -1,0 +1,36 @@
+/* --- ESTILOS DO PAINEL DO RADIALISTA (DISPOSIÇÃO E CONTROLES) --- */
+.header-painel {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--roxo-fundo);
+    border-bottom: 2px solid var(--roxo-card);
+    justify-content: space-between;
+}
+
+.container-painel {
+    display: flex;
+    /* LAYOUT LADO A LADO */
+    gap: 30px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.card {
+    background-color: var(--roxo-card);
+    border-radius: 15px;
+    padding: 25px;
+    flex: 1;
+    /* IGUALA AS COLUNAS */
+}
+
+/* Estilos para botões de controle no painel */
+.botoes-ao-vivo {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+/* ... (Outras regras de botão e input do painel) ... */
