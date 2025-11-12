@@ -1,4 +1,4 @@
-// ARQUIVO: radiomaffei/static/js/radio.js (CÓDIGO CORRIGIDO E FINAL)
+// ARQUIVO: radiomaffei/static/js/radio.js
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const playPauseBtn = document.getElementById('play-pause-btn');
     const audioPlayer = document.getElementById('audio-player');
 
-    // --- Lógica de Controle do Player de Streaming ---
-    // Este código só roda se o botão estilizado e o player de streaming existirem (home.html)
+    // Este código só deve rodar se o botão estilizado e o player de streaming existirem
     if (playPauseBtn && audioPlayer) {
 
         // Função para manter o ícone sincronizado com o estado do áudio
@@ -45,4 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioPlayer.addEventListener('play', () => updateIcon(true));
         audioPlayer.addEventListener('pause', () => updateIcon(false));
     }
+
+    // --- Nota: A lógica de Slideshow e Menu está em seus respectivos arquivos ---
+
 });

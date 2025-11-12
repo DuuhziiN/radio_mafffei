@@ -1,3 +1,5 @@
+// ARQUIVO: radiomaffei/static/js/menu.js
+
 class MobileNavbar {
     constructor(mobileMenu, navList, navLinks) {
         this.mobileMenu = document.querySelector(mobileMenu);
@@ -5,6 +7,7 @@ class MobileNavbar {
         this.navLinks = document.querySelectorAll(navLinks);
         this.activeClass = "active";
 
+        // Bind the event handler to the instance
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -35,9 +38,11 @@ class MobileNavbar {
     }
 }
 
-const mobileNavbar = new MobileNavbar(
-    ".mobile-menu",
-    ".nav-list",
-    ".nav-list li",
-);
-mobileNavbar.init();
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileNavbar = new MobileNavbar(
+        ".mobile-menu",
+        ".nav-list",
+        ".nav-list li",
+    );
+    mobileNavbar.init();
+});

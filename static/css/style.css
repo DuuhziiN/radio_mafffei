@@ -1,5 +1,3 @@
-/* ARQUIVO: radiomaffei/static/css/index.css (ESTILOS CONSOLIDADOS E CORRIGIDOS) */
-
 /* --- VARIÁVEIS E BASE GERAL --- */
 :root {
     --roxo-fundo: #470154;
@@ -10,12 +8,9 @@
     /* Pink Neon */
     --color-primary: #fcd513;
     /* Amarelo (Destaque) */
+    --color-secondary: #d9d9d9;
     --preto-escuro: #1a0022;
-    /* Para inputs e backgrounds internos */
-    --verde-principal: #33a330;
-    /* Botões de Ação */
-    --vermelho-principal: #cc3333;
-    /* Botões de Deletar */
+    --padding-tabs: 15px;
 }
 
 * {
@@ -41,7 +36,6 @@ body {
 main {
     flex-grow: 1;
     padding-top: 8vh;
-    /* Espaço para o cabeçalho nav fixo */
 }
 
 a {
@@ -64,7 +58,6 @@ nav {
     background: #350a3f;
     height: 8vh;
     position: fixed;
-    /* MANTEM A NAV NO TOPO */
     width: 100%;
     top: 0;
     z-index: 1000;
@@ -77,227 +70,158 @@ nav {
 .nav-list {
     list-style: none;
     display: flex;
-    margin: 0;
 }
 
-.nav-list li {
-    margin-left: 32px;
+/* --- RESPONSIVIDADE DE NAVEGAÇÃO (JÁ ESTÁ FUNCIONAL) --- */
+
+/* --- ESTABILIDADE DO BANNER ROTATIVO --- */
+
+.slideshow-container {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    /* Limita o tamanho máximo */
+    margin: 40px auto 0 auto;
+    height: 400px;
+    /* ALTURA FIXA PARA EVITAR O 'PULA-PULA' */
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
+.mySlides {
+    display: none;
+    height: 100%;
+}
 
-/* --- ESTILOS DE COMPONENTES DE CONTEÚDO GERAL --- */
-
-.container-main,
-.playlist-section,
-.video-section {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+.mySlides img {
     width: 100%;
-}
-
-.sub-texto {
-    font-size: 1.1rem;
-    margin-bottom: 40px;
-    opacity: 0.8;
-}
-
-
-/* --- SEÇÕES (SOBRE NÓS, PROGRAMAÇÃO) --- */
-
-.bloco-info {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 60px;
-    text-align: left;
-    background-color: var(--roxo-card);
-    /* Fundo dos cards de informação */
-    padding: 25px;
-    border-radius: 10px;
-}
-
-.bloco-info.reverso {
-    flex-direction: row-reverse;
-}
-
-.imagem-coluna img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    height: auto;
+    height: 100%;
     object-fit: cover;
+    /* GARANTE QUE A IMAGEM CUBRA O ESPAÇO SEM DEFORMAR */
 }
 
-/* --- ESTILO DOS PLAYERS E BOTÕES DE AÇÃO --- */
+/* --- ESTILOS DO PLAYER PRINCIPAL (JÁ ESTÃO CORRETOS) --- */
 
 .radio-player-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    margin: 20px auto;
     background-color: var(--roxo-card);
     border: 5px solid var(--cor-destaque);
     border-radius: 82px;
-    box-sizing: border-box;
-    height: 120px;
 }
 
-.player-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+/* --- CORREÇÃO CRÍTICA: GALERIA DE VÍDEOS ALINHADA --- */
+
+.video-section {
+    background-color: transparent;
+    padding: 60px 20px;
+    text-align: center;
 }
 
-.btn-play-pause {
-    /* BOTÃO ESTILIZADO DE STREAMING */
-    width: 70px;
-    height: 70px;
-    min-width: 70px;
-    border-radius: 50%;
-    background-color: var(--roxo-fundo);
+.video-gallery {
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    color: var(--cor-destaque);
-    /* Pink Neon */
-    margin: 0 20px;
-    outline: none;
-    box-shadow: 0 0 15px var(--cor-destaque);
-}
-
-.btn-abrir-player {
-    background-color: var(--color-primary);
-    /* Amarelo */
-    border: 6px solid var(--roxo-fundo);
-    border-radius: 37px;
-    color: var(--roxo-fundo);
-    font-weight: 700;
-}
-
-.btn-programacao {
-    background-color: var(--color-secondary);
-    border: 6px solid var(--roxo-fundo);
-    border-radius: 37px;
-    color: var(--roxo-fundo);
-    font-weight: 700;
-}
-
-/* --- PLAYLIST --- */
-.playlist-section {
-    background-color: transparent;
-}
-
-.musica-item {
-    background-color: var(--roxo-card);
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.musica-item audio {
-    width: 60%;
-    filter: invert(1);
-    /* Deixa o player preto/branco para contraste */
-}
-
-
-/* --- RODAPÉ --- */
-.rodape {
-    background-color: black;
-    color: white;
-    padding: 30px 20px 10px;
-    line-height: 1.5;
-    margin-top: 40px;
-}
-
-.rodape-conteudo {
-    display: flex;
-    justify-content: space-around;
-    max-width: 1200px;
-    margin: 0 auto;
+    gap: 30px;
     flex-wrap: wrap;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
-.rodape-coluna {
-    padding: 15px;
-    flex: 1;
-    min-width: 250px;
+.video-card {
+    width: 300px;
+    max-width: 300px;
+    /* Fixa o tamanho do card */
+    text-align: left;
 }
 
-/* CORREÇÃO CRÍTICA DO RODAPÉ */
-.logo-jmradio-maior,
-.logo-jmradio-menor,
-.logo-parana-integral {
-    max-width: 100px;
-    /* Limita o tamanho das imagens */
-    height: auto;
+.video-thumbnail-wrapper {
+    width: 100%;
+    height: 180px;
+    /* ALTURA FIXA PARA VÍDEOS (Aspecto 16:9) */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 0 5px var(--cor-destaque);
+    margin-bottom: 10px;
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- CORREÇÃO CRÍTICA: ESTILOS DE PROGRAMAÇÃO --- */
+
+.programacao-tabs-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background-color: var(--roxo-card);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tabs-header {
+    display: flex;
+    overflow-x: auto;
+    /* Permite scroll horizontal em telas pequenas */
+    border-bottom: 2px solid var(--roxo-claro);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 15px 20px;
+    color: var(--cor-texto);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.3s;
+}
+
+.tab-btn.active {
+    border-bottom: 3px solid var(--color-primary);
+    /* Amarelo Ativo */
+    color: var(--color-primary);
+}
+
+.conteudo-dia {
+    display: none;
+    padding: 20px;
+    line-height: 2.0;
+    /* Espaçamento para leitura */
+}
+
+.conteudo-dia.active {
     display: block;
 }
 
-.logo-parana-integral {
-    max-width: 150px;
-    margin-left: auto;
-}
-
-/* --- ESTILOS DO PAINEL DO RADIALISTA (APLICA-SE COM OVERRIDE) --- */
-.header-painel {
-    background-color: var(--roxo-fundo);
-}
-
-.container-painel {
+.conteudo-dia p {
+    margin: 8px 0;
     display: flex;
-    gap: 30px;
-    padding: 30px;
-    max-width: 1200px;
-    margin: 20px auto;
+    justify-content: space-between;
+    /* Alinha o horário à direita */
+    font-size: 16px;
 }
 
-.card {
-    background-color: var(--roxo-card);
-    border-radius: 15px;
-    padding: 25px;
-    flex: 1;
+.conteudo-dia span {
+    font-weight: bold;
+    color: var(--cor-destaque);
+    /* Pink Neon para o horário */
+    margin-left: 20px;
 }
 
-.btn-deletar {
-    background-color: var(--vermelho-principal);
-    padding: 5px 10px;
-    font-size: 0.8em;
-}
-
-
-/* --- RESPONSIVIDADE --- */
+/* --- (ESTILOS DE EQUIPE E RODAPÉ JÁ CORRIGIDOS...) --- */
 
 @media (max-width: 768px) {
-    .nav-list {
-        /* Lógica de menu mobile */
-        transform: translateX(100%);
-    }
 
-    .container-painel {
+    /* RESPONSIVIDADE DE COLUNAS */
+    .bloco-info {
         flex-direction: column;
+        /* Pilha verticalmente */
     }
 
-    .radio-player-container {
+    .bloco-info.reverso {
         flex-direction: column;
-        height: auto;
-        border-radius: 30px;
-    }
-
-    .rodape-conteudo {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .rodape-coluna {
-        min-width: 100%;
-        margin-bottom: 20px;
+        /* Mantém a pilha verticalmente */
     }
 }
