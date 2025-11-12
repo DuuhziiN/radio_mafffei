@@ -77,4 +77,4 @@ def midias(request):
     return render(request, 'midias.html', {'galeria': galeria_midia})
 
 def concursos(request):
-    return render(request, 'concursos.html')
+    return render(request, 'concursos_programas.html')
