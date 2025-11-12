@@ -181,3 +181,85 @@ nav {
 @media (max-width: 768px) {
     /* ... (Estilos de responsividade) ... */
 }
+
+
+.musica-item {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+    background-color: var(--roxo-card);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.musica-titulo {
+    font-weight: bold;
+    color: var(--color-primary);
+    /* Amarelo */
+    margin-bottom: 10px;
+}
+
+.custom-player {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    background-color: var(--preto-escuro);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.audio-source {
+    display: none;
+    /* O player nativo fica escondido */
+}
+
+.player-btn {
+    background-color: var(--cor-destaque);
+    /* Pink Neon */
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.player-btn i {
+    font-size: 14px;
+}
+
+.player-seekbar {
+    flex-grow: 1;
+    /* Ocupa o espaço central */
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--roxo-claro);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.player-seekbar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--color-primary);
+    /* Amarelo */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.player-time-current,
+.player-time-duration {
+    font-size: 0.8rem;
+    color: var(--cor-texto);
+    width: 40px;
+    text-align: center;
+}
