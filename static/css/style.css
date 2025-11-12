@@ -10,7 +10,10 @@
     /* Amarelo (Destaque) */
     --color-secondary: #d9d9d9;
     --preto-escuro: #1a0022;
-    --padding-tabs: 15px;
+    --verde-principal: #33a330;
+    /* Botões de Ação */
+    --vermelho-principal: #cc3333;
+    /* Botões de Deletar */
 }
 
 * {
@@ -21,8 +24,10 @@
     letter-spacing: 1px;
 }
 
-/* FUNDO E LAYOUT PRINCIPAL */
+/* --- FUNDO E LAYOUT PRINCIPAL --- */
+
 body {
+    /* Gradiente roxo/pink vibrante */
     background: linear-gradient(180deg, #40024e, #470356 0.01%, #600474 33.65%, var(--roxo-claro) 38.46%, #b013b7 58.65%, #c41dba 71.88%, var(--cor-destaque) 85.05%, #fb1ab4 90.23%, #ff39c0 97.12%);
     background-attachment: fixed;
     color: var(--cor-texto);
@@ -36,6 +41,7 @@ body {
 main {
     flex-grow: 1;
     padding-top: 8vh;
+    /* Espaço para o cabeçalho nav fixo */
 }
 
 a {
@@ -49,7 +55,7 @@ a:hover {
     color: var(--cor-destaque);
 }
 
-/* --- ESTILOS DE NAVEGAÇÃO E CABEÇALHO --- */
+/* --- NAVEGAÇÃO E CABEÇALHO --- */
 
 nav {
     display: flex;
@@ -61,10 +67,7 @@ nav {
     width: 100%;
     top: 0;
     z-index: 1000;
-}
-
-.logo-container img {
-    height: 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .nav-list {
@@ -72,26 +75,22 @@ nav {
     display: flex;
 }
 
-/* --- RESPONSIVIDADE DE NAVEGAÇÃO (JÁ ESTÁ FUNCIONAL) --- */
+.logo-container img {
+    height: 40px;
+}
 
-/* --- ESTABILIDADE DO BANNER ROTATIVO --- */
+/* --- ESTABILIDADE DO BANNER ROTATIVO (CORREÇÃO DE PULA-PULA) --- */
 
 .slideshow-container {
     position: relative;
     width: 90%;
     max-width: 1000px;
-    /* Limita o tamanho máximo */
     margin: 40px auto 0 auto;
     height: 400px;
     /* ALTURA FIXA PARA EVITAR O 'PULA-PULA' */
     overflow: hidden;
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-.mySlides {
-    display: none;
-    height: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .mySlides img {
@@ -101,18 +100,50 @@ nav {
     /* GARANTE QUE A IMAGEM CUBRA O ESPAÇO SEM DEFORMAR */
 }
 
-/* --- ESTILOS DO PLAYER PRINCIPAL (JÁ ESTÃO CORRETOS) --- */
+
+/* --- LAYOUT DE PLAYERS E PLAYLIST --- */
 
 .radio-player-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 20px auto;
     background-color: var(--roxo-card);
     border: 5px solid var(--cor-destaque);
     border-radius: 82px;
+    height: 120px;
 }
 
-/* --- CORREÇÃO CRÍTICA: GALERIA DE VÍDEOS ALINHADA --- */
+.player-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.btn-play-pause {
+    /* BOTÃO ESTILIZADO DE STREAMING */
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: var(--roxo-fundo);
+    color: var(--cor-destaque);
+    box-shadow: 0 0 10px var(--roxo-claro);
+}
+
+.btn-abrir-player {
+    background-color: var(--color-primary);
+    /* Amarelo */
+    border: 6px solid var(--roxo-fundo);
+    border-radius: 37px;
+    color: var(--roxo-fundo);
+    font-weight: 700;
+}
+
+/* --- SEÇÃO DE VÍDEOS (CORREÇÃO DE ALINHAMENTO) --- */
 
 .video-section {
-    background-color: transparent;
     padding: 60px 20px;
     text-align: center;
 }
@@ -129,99 +160,99 @@ nav {
 .video-card {
     width: 300px;
     max-width: 300px;
-    /* Fixa o tamanho do card */
     text-align: left;
 }
 
 .video-thumbnail-wrapper {
     width: 100%;
     height: 180px;
-    /* ALTURA FIXA PARA VÍDEOS (Aspecto 16:9) */
+    /* ALTURA FIXA PARA VÍDEOS */
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 0 0 5px var(--cor-destaque);
-    margin-bottom: 10px;
 }
 
-.video-thumbnail {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* --- CORREÇÃO CRÍTICA: ESTILOS DE PROGRAMAÇÃO --- */
-
-.programacao-tabs-container {
+/* --- PLAYLIST E MÍDIA --- */
+.playlist-section {
+    background-color: transparent;
+    padding: 40px 20px;
     max-width: 1000px;
-    margin: 40px auto;
+    margin: 20px auto;
+}
+
+.musica-item {
     background-color: var(--roxo-card);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.tabs-header {
-    display: flex;
-    overflow-x: auto;
-    /* Permite scroll horizontal em telas pequenas */
-    border-bottom: 2px solid var(--roxo-claro);
-}
-
-.tab-btn {
-    background: none;
-    border: none;
-    padding: 15px 20px;
-    color: var(--cor-texto);
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background-color 0.3s;
-}
-
-.tab-btn.active {
-    border-bottom: 3px solid var(--color-primary);
-    /* Amarelo Ativo */
-    color: var(--color-primary);
-}
-
-.conteudo-dia {
-    display: none;
-    padding: 20px;
-    line-height: 2.0;
-    /* Espaçamento para leitura */
-}
-
-.conteudo-dia.active {
-    display: block;
-}
-
-.conteudo-dia p {
-    margin: 8px 0;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
-    /* Alinha o horário à direita */
-    font-size: 16px;
+    align-items: center;
 }
 
-.conteudo-dia span {
-    font-weight: bold;
-    color: var(--cor-destaque);
-    /* Pink Neon para o horário */
-    margin-left: 20px;
+/* --- RODAPÉ --- */
+.rodape {
+    background-color: black;
+    padding: 30px 20px 10px;
 }
 
-/* --- (ESTILOS DE EQUIPE E RODAPÉ JÁ CORRIGIDOS...) --- */
+/* --- ESTILOS DO PAINEL DO RADIALISTA (DISPOSIÇÃO CORRIGIDA) --- */
 
-@media (max-width: 768px) {
-
-    /* RESPONSIVIDADE DE COLUNAS */
-    .bloco-info {
-        flex-direction: column;
-        /* Pilha verticalmente */
-    }
-
-    .bloco-info.reverso {
-        flex-direction: column;
-        /* Mantém a pilha verticalmente */
-    }
+.header-painel {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--roxo-fundo);
+    border-bottom: 2px solid var(--roxo-card);
+    justify-content: space-between;
 }
+
+.container-painel {
+    display: flex;
+    /* LAYOUT LADO A LADO */
+    gap: 30px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.card {
+    background-color: var(--roxo-card);
+    border-radius: 15px;
+    padding: 25px;
+    flex: 1;
+    /* IGUALA AS COLUNAS */
+}
+
+/* Estilos para formulário e botões de controle no painel */
+.botoes-ao-vivo {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.btn-iniciar {
+    background-color: var(--verde-principal);
+}
+
+.btn-parar {
+    background-color: var(--vermelho-principal);
+}
+
+.input-texto {
+    background-color: var(--preto-escuro);
+    color: var(--cor-texto);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.btn-adicionar {
+    background-color: var(--verde-principal);
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* --- FIM --- */
