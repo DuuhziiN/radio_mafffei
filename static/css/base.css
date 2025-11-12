@@ -1,4 +1,4 @@
-/* ARQUIVO: radiomaffei/static/css/base.css (ESTILOS ESSENCIAIS E RESPONSIVIDADE GLOBAL) */
+/* ARQUIVO: radiomaffei/static/css/base.css (CÓDIGO FINAL DE ESTABILIDADE) */
 
 /* --- VARIÁVEIS E BASE GERAL --- */
 :root {
@@ -21,13 +21,11 @@
     letter-spacing: 1px;
 }
 
-/* FUNDO E LAYOUT PRINCIPAL */
 body {
     background: linear-gradient(180deg, #40024e, #470356 0.01%, #600474 33.65%, var(--roxo-claro) 38.46%, #b013b7 58.65%, #c41dba 71.88%, var(--cor-destaque) 85.05%, #fb1ab4 90.23%, #ff39c0 97.12%);
     background-attachment: fixed;
     color: var(--cor-texto);
     background-size: cover;
-    /* CRÍTICO: Previne scroll horizontal em mobile */
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
@@ -41,6 +39,10 @@ main {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
+    padding-left: 10px;
+    /* Adiciona padding lateral para mobile */
+    padding-right: 10px;
+    box-sizing: border-box;
 }
 
 a {
@@ -54,7 +56,7 @@ a:hover {
     color: var(--cor-destaque);
 }
 
-/* --- ESTILOS DE NAVEGAÇÃO (CABEÇALHO) --- */
+/* --- ESTILOS DE NAVEGAÇÃO E CABEÇALHO (Responsivo) --- */
 
 header nav {
     display: flex;
@@ -85,8 +87,7 @@ header nav {
     font-weight: 500;
 }
 
-
-/* --- ESTILOS DO RODAPÉ (CORRIGIDO E ORDENADO) --- */
+/* --- ESTILOS DO RODAPÉ (GARANTIA DE RESPONSIVIDADE) --- */
 
 .rodape {
     background-color: black;
@@ -108,32 +109,23 @@ header nav {
 .rodape-coluna {
     padding: 15px;
     flex-basis: 30%;
-    /* Garante proporção de 3 colunas em desktop */
     min-width: 280px;
 }
 
-.rodape-coluna h3 {
-    color: var(--color-primary);
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 5px;
-}
-
-/* Tamanho Padrão e Estabilidade das Imagens */
 .logo-jmradio-maior,
 .logo-jmradio-menor,
 .logo-parana-integral {
     max-width: 150px;
-    /* Limita o tamanho das imagens */
     height: auto;
     display: block;
     margin-bottom: 10px;
 }
 
-/* Responsividade para o Rodapé */
+/* Responsividade CRÍTICA: Empilha em mobile */
 @media (max-width: 768px) {
     .rodape-conteudo {
         flex-direction: column;
+        /* Empilha as colunas */
         text-align: center;
     }
 
@@ -144,13 +136,5 @@ header nav {
 
     .logo-parana-integral {
         margin: 20px auto 0;
-    }
-
-    .social-icons-rodape {
-        justify-content: center;
-    }
-
-    .rodape-col-social-parana {
-        text-align: center;
     }
 }
