@@ -27,7 +27,7 @@ h2 {
 }
 
 
-/* --- CORREÇÃO CRÍTICA DA PROGRAMAÇÃO (ABA / TABELA) --- */
+/* --- CORREÇÃO DA TABELA DE PROGRAMAÇÃO (ABA / TABELA) --- */
 
 .programacao-tabs-container {
     background-color: var(--roxo-card);
@@ -84,14 +84,41 @@ h2 {
 }
 
 
-/* --- ESTILOS DE GALERIA E IMAGENS (EQUIPE, MÍDIAS) --- */
+/* --- CORREÇÃO DA GALERIA DE EQUIPE E MÍDIAS --- */
 
 .equipe-galeria,
 .galeria-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Ajustado para 3 colunas em desktop e adaptação em mobile */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     margin-top: 20px;
+}
+
+.membro-card,
+.galeria-item {
+    background-color: var(--roxo-fundo);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.membro-foto-wrapper {
+    width: 100%;
+    height: 250px;
+    /* Altura fixa para alinhar as fotos */
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.membro-foto-wrapper img,
+.galeria-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* CRÍTICO: Garante que as imagens não fiquem esticadas */
+    border-radius: 8px;
 }
 
 .bloco-info {
@@ -102,10 +129,4 @@ h2 {
     background-color: var(--roxo-card);
     padding: 25px;
     border-radius: 10px;
-}
-
-.bloco-info img {
-    max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }

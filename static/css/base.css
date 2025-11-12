@@ -107,7 +107,7 @@ header nav {
 .rodape-coluna {
     padding: 15px;
     flex-basis: 30%;
-    /* Três colunas iguais (aprox.) */
+    /* Garante proporção de 3 colunas */
     min-width: 280px;
 }
 
@@ -123,9 +123,10 @@ header nav {
 .logo-jmradio-menor,
 .logo-parana-integral {
     max-width: 150px;
-    /* Limita o tamanho das imagens */
+    /* Limita o tamanho das imagens para que não fiquem gigantes */
     height: auto;
     display: block;
+    margin-bottom: 10px;
 }
 
 .logo-parana-integral {
