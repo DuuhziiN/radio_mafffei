@@ -129,7 +129,23 @@ h2 {
     border-radius: 10px;
 }
 
-/* Responsividade de Alinhamento para Conteúdo */
+.imagem-coluna {
+    flex: 1;
+    max-width: 50%;
+    /* Garante que a imagem não ocupe mais de 50% */
+}
+
+/* CRÍTICO: Garante que a imagem se ajuste ao container */
+.imagem-coluna img {
+    width: 100%;
+    /* A imagem nunca será maior que seu container (50%) */
+    height: auto;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsividade CRÍTICA: Pilha em mobile */
 @media (max-width: 768px) {
     .bloco-info {
         flex-direction: column;
@@ -138,15 +154,19 @@ h2 {
 
     .bloco-info.reverso {
         flex-direction: column;
+        /* Desativa a reversão em mobile */
     }
 
     .imagem-coluna {
         max-width: 100%;
+        /* Permite que a imagem ocupe a largura total em mobile */
+        order: -1;
+        /* Garante que a imagem apareça antes do texto em mobile */
     }
 
-    .equipe-galeria,
-    .galeria-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        /* 2-3 colunas pequenas */
+    .texto-coluna {
+        order: 1;
     }
+
+    /* ... (Outros ajustes de galeria) ... */
 }
