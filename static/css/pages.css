@@ -130,3 +130,57 @@ h2 {
     padding: 25px;
     border-radius: 10px;
 }
+
+
+.bloco-info {
+    display: flex;
+    align-items: flex-start;
+    /* Alinha o conteúdo ao topo (ajuda a evitar quebra) */
+    gap: 40px;
+    margin-bottom: 60px;
+    background-color: var(--roxo-card);
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.texto-coluna {
+    flex: 1;
+    /* Garante que a coluna de texto ocupe 50% */
+}
+
+.imagem-coluna {
+    flex: 1;
+    /* Garante que a coluna de imagem ocupe 50% */
+    max-width: 50%;
+    /* Limite para garantir que a coluna não estique demais */
+}
+
+/* Reverte a ordem de imagem/texto */
+.bloco-info.reverso {
+    flex-direction: row-reverse;
+}
+
+/* Garantir que as imagens fiquem dentro do container (CRÍTICO) */
+.bloco-info img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Responsividade: Voltar para coluna única em telas pequenas */
+@media (max-width: 768px) {
+    .bloco-info {
+        flex-direction: column;
+    }
+
+    .bloco-info.reverso {
+        flex-direction: column;
+        /* Desativa a reversão em mobile */
+    }
+
+    .imagem-coluna {
+        max-width: 100%;
+        /* Permite que a imagem ocupe a largura total */
+    }
+}
