@@ -77,12 +77,11 @@
         <!-- PLAYLIST DE MÚSICAS GRAVADAS (NOVO PLAYER ESTILIZADO) -->
         <div class="playlist-section">
             <h2>Músicas na Playlist</h2>
-
             {% for musica in musicas %}
             <div class="musica-item">
                 <p class="musica-titulo">{{ musica.titulo }}</p>
 
-                <!-- CORREÇÃO CRÍTICA: USAR A URL DINÂMICA DE DJANGO -->
+                <!-- NOVO PLAYER ESTILIZADO -->
                 <div class="custom-player" data-audio-url="{{ musica.arquivo.url }}">
                     <audio src="{{ musica.arquivo.url }}" class="audio-source"></audio>
 
@@ -97,7 +96,10 @@
                 </div>
                 <!-- FIM NOVO PLAYER -->
             </div>
-
+            {% empty %}
+            <p>Nenhuma música gravada.</p>
+            {% endfor %}
+            <!-- ERRO CRÍTICO AQUI: O LOOP ESTAVA SEM FECHAMENTO -->
         </div>
 
         <!-- SEÇÃO DE VÍDEOS -->
