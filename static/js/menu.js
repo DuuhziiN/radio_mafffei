@@ -12,6 +12,7 @@ class MobileNavbar {
 
     animateLinks() {
         this.navLinks.forEach((link) => {
+            // Reativa a animação de fade-in/fade-out
             link.style.animation
                 ? (link.style.animation = "")
                 : (link.style.animation = `navLinkFade 0.5s ease forwards 0.3s`);
@@ -19,12 +20,15 @@ class MobileNavbar {
     }
 
     handleClick() {
+        // 1. Alterna a classe 'active' no nav-list (para aparecer/sumir)
         this.navList.classList.toggle(this.activeClass);
+        // 2. Alterna a classe 'active' no mobile-menu (para virar o 'X')
         this.mobileMenu.classList.toggle(this.activeClass);
         this.animateLinks();
     }
 
     addClickEvent() {
+        // Adiciona o evento de clique
         if (this.mobileMenu) {
             this.mobileMenu.addEventListener("click", this.handleClick);
         }
@@ -39,7 +43,7 @@ class MobileNavbar {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa a navegação mobile
+    // Inicializa a navegação mobile ao carregar a página
     const mobileNavbar = new MobileNavbar(
         ".mobile-menu",
         ".nav-list",
