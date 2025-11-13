@@ -1,6 +1,6 @@
 /* ARQUIVO: radiomaffei/static/css/pages.css (CORREÇÃO DA PROGRAMAÇÃO E LAYOUTS SECUNDÁRIOS) */
 
-/* Layouts Gerais de Conteúdo */
+/* --- Layouts Gerais de Conteúdo (Estrutura de Container) --- */
 .programa-content,
 .sobre-nos-container,
 .equipe-container,
@@ -27,7 +27,7 @@ h2 {
 }
 
 
-/* --- CORREÇÃO DA TABELA DE PROGRAMAÇÃO (ABA / TABELA) --- */
+/* --- CORREÇÃO DA TABELA DE PROGRAMAÇÃO (Funcionalidade) --- */
 
 .programacao-tabs-container {
     background-color: var(--roxo-card);
@@ -71,7 +71,6 @@ h2 {
 .conteudo-dia p {
     display: flex;
     justify-content: space-between;
-    /* CRÍTICO: Alinha o horário à direita */
     padding: 12px 0;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
     font-size: 1.1em;
@@ -84,7 +83,46 @@ h2 {
 }
 
 
-/* --- CORREÇÃO DA GALERIA DE EQUIPE E BLOCO INFO (SOBRE NÓS) --- */
+/* --- CORREÇÃO CRÍTICA DA GALERIA DE EQUIPE E MÍDIAS --- */
+
+.equipe-galeria,
+.galeria-grid {
+    display: grid;
+    /* Força 3 colunas em desktop e adapta para 2 em mobile */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.membro-card,
+.galeria-item {
+    background-color: var(--roxo-fundo);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.membro-foto-wrapper {
+    width: 100%;
+    height: 250px;
+    /* Altura fixa para ALINHAR TODAS AS FOTOS */
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.membro-foto-wrapper img,
+.galeria-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Garante que a imagem preencha sem distorcer */
+    border-radius: 8px;
+}
+
+
+/* --- CORREÇÃO DO BLOCO INFO (SOBRE NÓS / IMAGENS VAZANDO) --- */
 
 .bloco-info {
     display: flex;
@@ -96,28 +134,15 @@ h2 {
     border-radius: 10px;
 }
 
-.texto-coluna {
-    flex: 1;
-}
-
 .imagem-coluna {
     flex: 1;
     max-width: 50%;
-    /* Garante que a coluna de imagem ocupe no máximo 50% */
+    /* Garante que a imagem não ocupe mais de 50% em desktop */
 }
 
-/* CRÍTICO: Garante que a imagem se ajuste AO CONTAINER, eliminando o overflow */
-.imagem-coluna img {
-    width: 100%;
-    height: auto;
-    /* Mantém a proporção */
-    max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+.texto-coluna {
+    flex: 1;
 }
-
-
-/* ... (Outras regras de galeria) ... */
 
 /* Responsividade CRÍTICA: Pilha em mobile */
 @media (max-width: 768px) {
@@ -128,7 +153,6 @@ h2 {
 
     .bloco-info.reverso {
         flex-direction: column;
-        /* Desativa a reversão em mobile */
     }
 
     .imagem-coluna {
@@ -137,12 +161,9 @@ h2 {
         order: -1;
     }
 
-    .texto-coluna {
-        order: 1;
-    }
-
     .equipe-galeria,
     .galeria-grid {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        /* Garante 2 colunas em mobile */
     }
 }
