@@ -19,9 +19,7 @@ class MobileNavbar {
     }
 
     handleClick() {
-        // 1. Alterna a classe 'active' no nav-list (para aparecer/sumir)
         this.navList.classList.toggle(this.activeClass);
-        // 2. Alterna a classe 'active' no mobile-menu (para virar o 'X')
         this.mobileMenu.classList.toggle(this.activeClass);
         this.animateLinks();
     }
@@ -34,19 +32,15 @@ class MobileNavbar {
     }
 
     init() {
-        // O init será chamado SOMENTE após o DOM carregar
         if (this.mobileMenu) {
             this.addClickEvent();
-            // Garante que a nav-list esteja invisível ao iniciar em mobile
-            // Embora o CSS faça isso, é uma garantia extra
-            this.navList.classList.remove(this.activeClass);
         }
         return this;
     }
 }
 
-// CRÍTICO: Inicializa a classe após o DOM carregar
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializa a navegação mobile ao carregar a página
     const mobileNavbar = new MobileNavbar(
         ".mobile-menu",
         ".nav-list",
