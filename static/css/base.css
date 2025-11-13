@@ -166,6 +166,7 @@ header nav {
         /* Esconde fora da tela */
         transition: transform 0.3s ease-in;
         display: flex;
+        z-index: 999;
     }
 
     .mobile-menu {

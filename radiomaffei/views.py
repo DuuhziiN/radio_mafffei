@@ -64,12 +64,12 @@ def equipe(request):
         {'nome': 'Italo', 'foto': 'img/Italo.jpg'},
         {'nome': 'Luiz B.', 'foto': 'img/LuizB.jpg'},
         {'nome': 'Marla', 'foto': 'img/Marla.jpg'},
-        {'nome': 'Camila', 'foto': 'img/Camila.jpg'},
+        {'nome': 'Camila', 'foto': 'img/Camila.jpeg'},
         {'nome': 'Lucas', 'foto': 'img/Lucas.jpg'},
         {'nome': 'Luis', 'foto': 'img/luis.jpg'},
         {'nome': 'Maria E.', 'foto': 'img/Maria.jpg'},
         {'nome': 'Maria V.', 'foto': 'img/Maria_Vitoria.jpg'},
-        {'nome': 'Emillyana', 'foto': 'img/Emillyana.jpg'},
+        {'nome': 'Emillyana', 'foto': 'img/Emillyana.jpeg'},
     ]
     return render(request, 'equipe.html', {'membros': equipe_membros})
 

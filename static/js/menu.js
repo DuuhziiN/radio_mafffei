@@ -12,7 +12,6 @@ class MobileNavbar {
 
     animateLinks() {
         this.navLinks.forEach((link) => {
-            // Reativa a animação de fade-in/fade-out
             link.style.animation
                 ? (link.style.animation = "")
                 : (link.style.animation = `navLinkFade 0.5s ease forwards 0.3s`);
@@ -35,15 +34,19 @@ class MobileNavbar {
     }
 
     init() {
+        // O init será chamado SOMENTE após o DOM carregar
         if (this.mobileMenu) {
             this.addClickEvent();
+            // Garante que a nav-list esteja invisível ao iniciar em mobile
+            // Embora o CSS faça isso, é uma garantia extra
+            this.navList.classList.remove(this.activeClass);
         }
         return this;
     }
 }
 
+// CRÍTICO: Inicializa a classe após o DOM carregar
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa a navegação mobile ao carregar a página
     const mobileNavbar = new MobileNavbar(
         ".mobile-menu",
         ".nav-list",
