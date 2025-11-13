@@ -78,12 +78,13 @@
         <div class="playlist-section">
             <h2>Músicas na Playlist</h2>
 
+            {% for musica in musicas %}
             <div class="musica-item">
-                <p class="musica-titulo">dsafasfda</p>
+                <p class="musica-titulo">{{ musica.titulo }}</p>
 
-                <!-- NOVO PLAYER ESTILIZADO -->
-                <div class="custom-player" data-audio-url="/media/musicas/teste_nW5igI8.mp3">
-                    <audio src="/media/musicas/teste_nW5igI8.mp3" class="audio-source"></audio>
+                <!-- CORREÇÃO CRÍTICA: USAR A URL DINÂMICA DE DJANGO -->
+                <div class="custom-player" data-audio-url="{{ musica.arquivo.url }}">
+                    <audio src="{{ musica.arquivo.url }}" class="audio-source"></audio>
 
                     <button class="player-btn btn-play-pause-playlist">
                         <i class="fa-solid fa-play"></i>
