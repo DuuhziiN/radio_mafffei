@@ -92,7 +92,6 @@ header nav {
 /* NOVO: Estilo para o ícone de hambúrguer */
 .mobile-menu {
     display: none;
-    /* Escondido por padrão em desktop */
     cursor: pointer;
     z-index: 1001;
 }
@@ -106,7 +105,7 @@ header nav {
     border-radius: 2px;
 }
 
-/* --- ESTILOS DO RODAPÉ (CORRIGIDO E ORDENADO) --- */
+/* --- ESTILOS DO RODAPÉ (GARANTIA DE PROPORÇÃO) --- */
 
 .rodape {
     background-color: black;

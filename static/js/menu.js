@@ -11,18 +11,15 @@ class MobileNavbar {
     }
 
     animateLinks() {
-        this.navLinks.forEach((link, index) => {
+        this.navLinks.forEach((link) => {
             link.style.animation
                 ? (link.style.animation = "")
-                : (link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3
-                    }s`);
+                : (link.style.animation = `navLinkFade 0.5s ease forwards 0.3s`);
         });
     }
 
     handleClick() {
-        // 1. Alterna a classe 'active' no nav-list (para aparecer/sumir)
         this.navList.classList.toggle(this.activeClass);
-        // 2. Alterna a classe 'active' no mobile-menu (para virar o 'X')
         this.mobileMenu.classList.toggle(this.activeClass);
         this.animateLinks();
     }
