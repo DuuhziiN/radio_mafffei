@@ -59,12 +59,17 @@ def sobre_nos(request):
 def equipe(request):
     # Dados de exemplo para a equipe
     equipe_membros = [
-        {'nome': 'Alicya', 'foto': 'img/Alicya.jpg'},
+        {'nome': 'Francine', 'foto': 'img/Francine.jpg'},
         {'nome': 'Emanuelly', 'foto': 'img/Emanuelly.jpg'},
         {'nome': 'Italo', 'foto': 'img/Italo.jpg'},
         {'nome': 'Luiz B.', 'foto': 'img/LuizB.jpg'},
         {'nome': 'Marla', 'foto': 'img/Marla.jpg'},
-        {'nome': 'Nicolly', 'foto': 'img/nicolly.jpg'},
+        {'nome': 'Camila', 'foto': 'img/Camila.jpg'},
+        {'nome': 'Lucas', 'foto': 'img/Lucas.jpg'},
+        {'nome': 'Luis', 'foto': 'img/luis.jpg'},
+        {'nome': 'Maria E.', 'foto': 'img/Maria.jpg'},
+        {'nome': 'Maria V.', 'foto': 'img/Maria_Vitoria.jpg'},
+        {'nome': 'Emillyana', 'foto': 'img/Emillyana.jpg'},
     ]
     return render(request, 'equipe.html', {'membros': equipe_membros})
 
