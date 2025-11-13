@@ -156,10 +156,26 @@ header nav {
 
 @media (max-width: 999px) {
     .nav-list {
-        display: none;
+        position: fixed;
+        top: 8vh;
+        right: 0;
+        width: 60vw;
+        height: 92vh;
+        background: #350a3f;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        /* Garante que o menu esteja fora da tela por padrão */
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in;
     }
 
     .mobile-menu {
         display: block;
+        cursor: pointer;
+    }
+
+    .nav-list.active {
+        transform: translateX(0);
     }
 }
