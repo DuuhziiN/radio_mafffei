@@ -135,9 +135,12 @@ h2 {
 }
 
 .imagem-coluna {
-    flex: 1;
-    max-width: 50%;
-    /* Garante que a imagem não ocupe mais de 50% em desktop */
+    width: 100%;
+    /* A imagem nunca será maior que 100% do seu container */
+    height: auto;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 .texto-coluna {
@@ -149,16 +152,23 @@ h2 {
     .bloco-info {
         flex-direction: column;
         /* Empilha o Sobre Nós em mobile */
+        gap: 20px;
     }
 
     .bloco-info.reverso {
         flex-direction: column;
+        /* Desativa a reversão em mobile */
     }
 
     .imagem-coluna {
         max-width: 100%;
         /* Permite que a imagem ocupe a largura total em mobile */
         order: -1;
+        /* Garante que a imagem apareça antes do texto em mobile */
+    }
+
+    .texto-coluna {
+        order: 1;
     }
 
     .equipe-galeria,

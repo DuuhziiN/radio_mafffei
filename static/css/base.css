@@ -1,4 +1,4 @@
-/* ARQUIVO: radiomaffei/static/css/base.css (ESTILOS ESSENCIAIS E RODAPÉ ESTÁVEL) */
+/* ARQUIVO: radiomaffei/static/css/base.css (ESTILOS ESSENCIAIS E CABEÇALHO RESPONSIVO) */
 
 /* --- VARIÁVEIS E BASE GERAL --- */
 :root {
@@ -28,6 +28,7 @@ body {
     color: var(--cor-texto);
     background-size: cover;
     overflow-x: hidden;
+    /* CRÍTICO: PREVINE SCROLL HORIZONTAL */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -38,6 +39,7 @@ main {
     padding-top: 8vh;
     padding-bottom: 50px;
     max-width: 1200px;
+    /* Limita o MAIN */
     width: 100%;
     margin: 0 auto;
     padding-left: 20px;
@@ -90,6 +92,7 @@ header nav {
 /* NOVO: Estilo para o ícone de hambúrguer */
 .mobile-menu {
     display: none;
+    /* Escondido por padrão em desktop */
     cursor: pointer;
     z-index: 1001;
 }
@@ -145,7 +148,7 @@ header nav {
     margin-bottom: 10px;
 }
 
-/* Responsividade CRÍTICA (MOBILE LAYOUT) */
+/* --- RESPONSIVIDADE CRÍTICA (MOBILE LAYOUT) --- */
 
 @media (max-width: 999px) {
 
@@ -161,6 +164,7 @@ header nav {
         align-items: center;
         justify-content: space-around;
         transform: translateX(100%);
+        /* Esconde fora da tela */
         transition: transform 0.3s ease-in;
         display: flex;
     }
