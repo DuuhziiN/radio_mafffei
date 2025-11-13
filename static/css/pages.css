@@ -27,7 +27,7 @@ h2 {
 }
 
 
-/* --- CORREÇÃO CRÍTICA DA PROGRAMAÇÃO (TABELA E ABAS) --- */
+/* --- CORREÇÃO DA TABELA DE PROGRAMAÇÃO (ABA / TABELA) --- */
 
 .programacao-tabs-container {
     background-color: var(--roxo-card);
@@ -86,39 +86,6 @@ h2 {
 
 /* --- CORREÇÃO DA GALERIA DE EQUIPE E BLOCO INFO (SOBRE NÓS) --- */
 
-.equipe-galeria,
-.galeria-grid {
-    display: grid;
-    /* Ajustado para 2 colunas em telas menores e 3+ em desktop */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.membro-card,
-.galeria-item {
-    background-color: var(--roxo-fundo);
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-}
-
-.membro-foto-wrapper {
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.membro-foto-wrapper img,
-.galeria-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
 .bloco-info {
     display: flex;
     align-items: flex-start;
@@ -129,21 +96,28 @@ h2 {
     border-radius: 10px;
 }
 
+.texto-coluna {
+    flex: 1;
+}
+
 .imagem-coluna {
     flex: 1;
     max-width: 50%;
-    /* Garante que a imagem não ocupe mais de 50% */
+    /* Garante que a coluna de imagem ocupe no máximo 50% */
 }
 
-/* CRÍTICO: Garante que a imagem se ajuste ao container */
+/* CRÍTICO: Garante que a imagem se ajuste AO CONTAINER, eliminando o overflow */
 .imagem-coluna img {
     width: 100%;
-    /* A imagem nunca será maior que seu container (50%) */
     height: auto;
+    /* Mantém a proporção */
     max-width: 100%;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
+
+
+/* ... (Outras regras de galeria) ... */
 
 /* Responsividade CRÍTICA: Pilha em mobile */
 @media (max-width: 768px) {
@@ -161,12 +135,14 @@ h2 {
         max-width: 100%;
         /* Permite que a imagem ocupe a largura total em mobile */
         order: -1;
-        /* Garante que a imagem apareça antes do texto em mobile */
     }
 
     .texto-coluna {
         order: 1;
     }
 
-    /* ... (Outros ajustes de galeria) ... */
+    .equipe-galeria,
+    .galeria-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
 }
