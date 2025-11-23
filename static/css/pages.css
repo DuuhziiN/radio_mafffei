@@ -159,6 +159,8 @@ h2 {
     }
 
     .imagem-coluna {
+        width: 100%;
+        height: auto;
         max-width: 100%;
         /* Permite que a imagem ocupe a largura total em mobile */
         order: -1;

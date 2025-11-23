@@ -192,7 +192,7 @@ nav {
         height: 100%;
         /* Volta a preencher 100% da altura reduzida */
         width: 100%;
-        object-fit: cover;
+        object-fit: contain;
         /* Permite cortar um pouco se a imagem for muito alta */
     }
 }
