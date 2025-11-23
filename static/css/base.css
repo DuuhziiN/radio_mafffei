@@ -79,8 +79,8 @@ header nav {
 
 .nav-list {
     list-style: none;
-    transform: translateX(100%);
-    /* Esconde fora da tela */
+    transform: none;
+    position: static;
     transition: transform 0.3s ease-in;
     display: flex;
     gap: 25px;
