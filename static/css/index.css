@@ -91,15 +91,18 @@ nav {
     position: relative;
     width: 90%;
     margin: 40px auto 0;
-    height: 400px;
-    /* ALTURA FIXA */
+    max-height: 500px;
+    /* Use max-height, não height fixo, para não cortar demais */
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 
 .mySlides img {
-    height: 100%;
+    width: 100%;
+    /* Garante que a imagem sempre preencha a largura total */
+    height: auto;
+    /* Deixa a altura se ajustar automaticamente, evitando o corte */
     object-fit: cover;
 }
 
@@ -179,7 +182,19 @@ nav {
 }
 
 @media (max-width: 768px) {
-    /* ... (Estilos de responsividade) ... */
+    .slideshow-container {
+        height: 200px;
+        /* Reduz a altura para economizar espaço e evitar áreas vazias */
+        margin-top: 20px;
+    }
+
+    .mySlides img {
+        height: 100%;
+        /* Volta a preencher 100% da altura reduzida */
+        width: 100%;
+        object-fit: cover;
+        /* Permite cortar um pouco se a imagem for muito alta */
+    }
 }
 
 
