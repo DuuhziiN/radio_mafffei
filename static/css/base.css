@@ -216,8 +216,36 @@ header nav {
     }
 
     .social-icons-rodape {
+        display: flex;
+        gap: 15px;
+        /* Espaço entre os ícones */
+        margin-top: 20px;
+        /* Para telas grandes, alinhe à esquerda se a coluna for grande */
         justify-content: center;
-        /* Centraliza ícones em mobile */
+    }
+
+    .social-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 45px;
+        /* Tamanho do círculo */
+        height: 45px;
+        border-radius: 50%;
+        /* Faz um círculo */
+        background-color: var(--roxo-claro);
+        /* Cor de fundo para o ícone */
+        color: var(--cor-texto);
+        font-size: 20px;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .social-icon:hover {
+        background-color: var(--cor-destaque);
+        /* Muda a cor no hover */
+        color: black;
+        transform: scale(1.1);
+        /* Efeito sutil de zoom */
     }
 
     .rodape-col-social-parana {
