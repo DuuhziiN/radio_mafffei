@@ -79,6 +79,9 @@ header nav {
 
 .nav-list {
     list-style: none;
+    transform: translateX(100%);
+    /* Esconde fora da tela */
+    transition: transform 0.3s ease-in;
     display: flex;
     gap: 25px;
     margin: 0;
@@ -168,6 +171,24 @@ header nav {
         transition: transform 0.3s ease-in;
         display: flex;
         z-index: 999;
+    }
+
+    .nav-list.active {
+        transform: translateX(0);
+        /* Traz o menu para a posição 0 (visível) */
+    }
+
+    /* Regras para o ícone de hambúrguer virar um 'X' (se estiver usando animação) */
+    .mobile-menu.active .line1 {
+        transform: rotate(-45deg) translate(-8px, 8px);
+    }
+
+    .mobile-menu.active .line2 {
+        opacity: 0;
+    }
+
+    .mobile-menu.active .line3 {
+        transform: rotate(45deg) translate(-8px, -8px);
     }
 
     .mobile-menu {
