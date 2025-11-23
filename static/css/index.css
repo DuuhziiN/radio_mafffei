@@ -183,17 +183,16 @@ nav {
 
 @media (max-width: 768px) {
     .slideshow-container {
-        height: 200px;
-        /* Reduz a altura para economizar espaço e evitar áreas vazias */
+        min-height: 150px;
+        width: 100%;
+        /* Garante que ocupe a largura total */
         margin-top: 20px;
     }
 
     .mySlides img {
-        height: 100%;
-        /* Volta a preencher 100% da altura reduzida */
         width: 100%;
-        object-fit: contain;
-        /* Permite cortar um pouco se a imagem for muito alta */
+        height: auto;
+        object-fit: initial;
     }
 }
 
