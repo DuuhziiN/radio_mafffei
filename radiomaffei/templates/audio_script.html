@@ -113,7 +113,12 @@
     // ===============================================
 
     mediaSource.addEventListener('sourceopen', () => {
+        const sourceBuffer = mediaSource.addSourceBuffer(mimeType);
 
+        // NOVO: Envia uma mensagem para o servidor avisando que o buffer está pronto.
+        if (socket.readyState === WebSocket.OPEN) {
+            socket.send(JSON.stringify({ 'command': 'ready_to_receive' }));
+        }
         document.dispatchEvent(new CustomEvent('mediaSourceReady'));
         if (!audioPlayer) return;
 
@@ -126,7 +131,7 @@
             return;
         }
 
-        const sourceBuffer = mediaSource.addSourceBuffer(mimeType);
+
 
         // ... (Resto da lógica de fila) ...
         const processQueue = () => {
