@@ -113,6 +113,8 @@
     // ===============================================
 
     mediaSource.addEventListener('sourceopen', () => {
+
+        document.dispatchEvent(new CustomEvent('mediaSourceReady'));
         if (!audioPlayer) return;
 
         // CRÍTICO: USA O MESMO CODEC DETECTADO PELO ORADOR
