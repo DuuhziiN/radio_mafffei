@@ -119,7 +119,6 @@
         const mimeType = supportedMimeType;
 
         if (!MediaSource.isTypeSupported(mimeType)) {
-            // Este erro é o que você está vendo agora!
             console.error('O Ouvinte não suporta o formato: ' + mimeType + '. Tente outro navegador.');
             if (statusMessage) statusMessage.textContent = 'ERRO CRÍTICO: Formato de áudio não suportado.';
             return;
@@ -129,18 +128,28 @@
 
         // ... (Resto da lógica de fila) ...
         const processQueue = () => {
+            // CORREÇÃO CRÍTICA #1: Verifica se o buffer ainda está aberto (evita InvalidStateError)
+            if (mediaSource.readyState !== 'open') {
+                console.warn("ProcessQueue ignorado: MediaSource não está aberto.");
+                return;
+            }
+
             if (!sourceBuffer.updating && audioQueue.length > 0) {
                 const chunk = audioQueue.shift();
                 try {
                     sourceBuffer.appendBuffer(chunk);
                 } catch (e) {
                     console.error("Erro de sincronização na fila:", e);
+                    // Tenta reprocessar após um pequeno delay em caso de erro
                     setTimeout(processQueue, 50);
                 }
             }
-            if (audioPlayer.paused) {
+            // CORREÇÃO CRÍTICA #2: REMOVE a tentativa de autoplay aqui. 
+            // O radio.js fará o play no clique do usuário.
+            /* if (audioPlayer.paused) {
                 audioPlayer.play().catch(e => { });
             }
+            */
         };
 
         sourceBuffer.addEventListener('updateend', processQueue);
