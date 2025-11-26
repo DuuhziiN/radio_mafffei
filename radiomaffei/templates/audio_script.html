@@ -51,7 +51,7 @@
     // Se a detecção falhou, desabilita a interface, mas a conexão WS já foi feita.
     if (!MediaRecorder.isTypeSupported(supportedMimeType)) {
         if (startButton) {
-            statusMessage.textContent = 'ERRO: Codec não suportado. Tente o Firefox.';
+            statusMessage.textContent = 'ERRO: Codec não suportado! Tente o Firefox.';
             startButton.disabled = true;
         }
     }
@@ -128,7 +128,7 @@
 
         // ... (Resto da lógica de fila) ...
         const processQueue = () => {
-            // CORREÇÃO CRÍTICA #1: Verifica se o buffer ainda está aberto (evita InvalidStateError)
+            // CORREÇÃO #1: Verifica se o buffer ainda está aberto (evita InvalidStateError)
             if (mediaSource.readyState !== 'open') {
                 console.warn("ProcessQueue ignorado: MediaSource não está aberto.");
                 return;
@@ -138,18 +138,22 @@
                 const chunk = audioQueue.shift();
                 try {
                     sourceBuffer.appendBuffer(chunk);
+
+                    // CORREÇÃO #2: Tenta dar play logo após o primeiro pedaço de áudio ser armazenado.
+                    // Isso sincroniza o play do usuário com o buffer MSE.
+                    if (audioPlayer.paused && audioPlayer.readyState >= 1) { // readyState 1 = METADATA_LOADED
+                        audioPlayer.play().catch(e => {
+                            // O catch é essencial para lidar com o bloqueio do navegador (se o play for disparado automaticamente)
+                            console.warn("Play falhou na fila (bloqueio do navegador):", e);
+                        });
+                    }
+
                 } catch (e) {
                     console.error("Erro de sincronização na fila:", e);
                     // Tenta reprocessar após um pequeno delay em caso de erro
                     setTimeout(processQueue, 50);
                 }
             }
-            // CORREÇÃO CRÍTICA #2: REMOVE a tentativa de autoplay aqui. 
-            // O radio.js fará o play no clique do usuário.
-            /* if (audioPlayer.paused) {
-                audioPlayer.play().catch(e => { });
-            }
-            */
         };
 
         sourceBuffer.addEventListener('updateend', processQueue);
@@ -160,7 +164,6 @@
             audioQueue.push(arrayBuffer);
             processQueue();
         };
-        document.dispatchEvent(new CustomEvent('streamReady'));
 
     }, false);
 </script>
