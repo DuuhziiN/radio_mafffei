@@ -160,6 +160,7 @@
             audioQueue.push(arrayBuffer);
             processQueue();
         };
+        document.dispatchEvent(new CustomEvent('streamReady'));
 
     }, false);
 </script>

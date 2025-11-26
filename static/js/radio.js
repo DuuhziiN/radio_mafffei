@@ -46,5 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Nota: A lógica de Slideshow e Menu está em seus respectivos arquivos ---
+    document.addEventListener('streamReady', () => {
+        console.log("Stream Ready: Habilitando controles e player.");
+        // Tenta dar Play somente se o usuário já clicou antes ou se for permitido
 
+        // Se você tiver um botão de "iniciar" no HTML, pode habilitá-lo aqui.
+        // Ex: playPauseBtn.disabled = false;
+    });
 });
